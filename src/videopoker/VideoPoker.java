@@ -45,7 +45,7 @@ public class VideoPoker {
 		return false;
 		
 	}
-	public boolean CheckForFlush(List<Card> test) {
+	public boolean CheckForStraight(List<Card> test) {
 		int a = calculateValueOfCard(test.get(0));
 		int b = calculateValueOfCard(test.get(1));
 		int c = calculateValueOfCard(test.get(2));
