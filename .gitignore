@@ -1,2 +1,2 @@
 # För att exkludera .classes filer m.m
-*./bin
+bin/
