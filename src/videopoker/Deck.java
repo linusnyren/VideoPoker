@@ -6,7 +6,7 @@ public class Deck {
 	
 	private List<Card> deckOfCards;
 //	Array med de olika valörerna som kan förekomma i en färg.
-	private String[] ranks = {"Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"};
+	private static String[] ranks = {"Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"};
 	
 //	Konstruktor
 	public Deck() {
@@ -64,7 +64,7 @@ public class Deck {
 	}
 	
 	
-	public String [] getRanks () {
+	public static String [] getRanks () {
 		return ranks;
 	} 	
 }
