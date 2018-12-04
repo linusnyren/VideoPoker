@@ -29,6 +29,34 @@ public class VideoPoker {
 		return handToSort;
 	
 	}
+	public boolean CheckForEquals(int par, List<Card> test) {
+		
+		if ( par == 3) {
+			if (calculateValueOfCard(test.get(0)) == calculateValueOfCard(test.get(1)) && calculateValueOfCard(test.get(1)) == calculateValueOfCard(test.get(2))){
+			return true;
+			}
+		}
+		
+		else if (par == 2) {
+			if (calculateValueOfCard(test.get(0)) == calculateValueOfCard(test.get(1))) {
+			return true;
+			}
+		}
+		return false;
+		
+	}
+	public boolean CheckForFlush(List<Card> test) {
+		int a = calculateValueOfCard(test.get(0));
+		int b = calculateValueOfCard(test.get(1));
+		int c = calculateValueOfCard(test.get(2));
+		int d = calculateValueOfCard(test.get(3));
+		int e = calculateValueOfCard(test.get(4));
+		if (a+1 == b && b+1 == c && c+1 == d && d+1 == e)
+			return true;
+		
+		else
+			return false;
+	}
 	
 	public int calculateValueOfCard(Card card) {
 		
