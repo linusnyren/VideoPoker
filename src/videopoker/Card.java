@@ -4,6 +4,7 @@ public class Card {
 	
 	private String rank;
 	private Suit suit;
+	public static String filename = "2_of_hearts.jpg";
 	
 	
 //	Konstruktor
@@ -34,6 +35,10 @@ public class Card {
 	public boolean equals(Object card) {
 //	Definierad equals metod för att möjliggöra jämförelser mellan kort. 		
 		return this.getSuit() == ((Card) card).getSuit() && this.getRank() == ((Card) card).getRank();
+	}
+	
+	private void createFilename() {
+		
 	}
 	
 
