@@ -35,12 +35,20 @@ public class Player {
 			return hand;
 		}
 		
+		public int getLastbet() {
+			return lastBet;
+		}
+		
+		public void setLastBet (int lastBet) {
+			this.lastBet = lastBet;
+		}
+ 		
 		public void addCardToHand (Card card) {
 			hand.add(card);
 		}
 		
-		public void removeCardFromHand (Card card) {
-			hand.remove(card);
+		public void removeCardFromHand (int index) {
+			hand.remove(index);
 		}
 		
 		

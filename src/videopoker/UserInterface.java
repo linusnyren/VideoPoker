@@ -125,16 +125,12 @@ public class UserInterface extends JFrame {
 		holdAndGetSecondHand.setEnabled(true); //Enable button for second hand.
 		
 		for (int i = 0 ; i < cards.length ; i++ ) {
-			Card card = deck.draw();
-			player.addCardToHand(card);
+			Card card = deck.draw();	//Draws new card
+			player.addCardToHand(card); //Adds the cards to the player hand
 //			TODO: replace static filename with filename provided by card.
 			cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_hearts.jpg")));
 		}
-		
-		for (Card card : player.getHand()) {
-			System.out.println(card);
-		}
-		
+
 	}
 	
 	public void holdAndGetNewCards () {
@@ -145,19 +141,18 @@ public class UserInterface extends JFrame {
 	
 		for (int i = 0 ; i < cards.length ; i++ ) {
 			if (cards[i].getBorder() != border) {
-				Card card = deck.draw();
-				player.addCardToHand(card);
+				player.removeCardFromHand(i); 	// Remove the card that the player does not want to keep
+				Card card = deck.draw(); 		//Draws new card 
+				player.addCardToHand(card);		//Adds the card to the hand.
 //				TODO: replace static filename with filename provided by card.
 				cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_clubs.jpg")));
 			}
 			
 			cards[i].setBorder(null); //Resets the border. 
 			
+//			TODO: Check if player won and (if applicable) make payout.
 			
-		}
-		
-		for (Card card : player.getHand()) {
-			System.out.println(card);
+			
 		}
 		
 	}
