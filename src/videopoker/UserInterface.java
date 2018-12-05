@@ -57,9 +57,8 @@ public class UserInterface extends JFrame {
 		for (int i = 0 ; i < cards.length ; i++ ) {
 			cards[i] = new JLabel(); //Instantiates JLabels.
 			centerPanel.add(cards[i]); //Adds cards (JLabel) to centerPanel.
-			cards[i].setIcon(new ImageIcon(filepath + Card.filename));
+			cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_spades.jpg")));
 			cards[i].addMouseListener(l);
-//			Add listeners here
 		}
 		
 //		Add buttons
