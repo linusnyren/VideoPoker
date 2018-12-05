@@ -42,7 +42,7 @@ public class VideoPokerTest {
 		hand.add(new Card(Suit.SPADES, "Seven"));
 		hand.add(new Card(Suit.CLUBS, "Eight"));
 		
-		assertFalse(video.CheckForEquals(2, hand));
+		assertFalse(video.CheckForEquals(4, hand));
 		
 	}
 	
