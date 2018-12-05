@@ -1,7 +1,9 @@
 package videopoker;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
+
 import java.util.List;
 
 public class VideoPoker {
@@ -164,12 +166,13 @@ public class VideoPoker {
 		return -1;
 	}
 
+
 public int getHandScore(int coins, List<Card> hand) {
 	
-		if (straightFlush() == true) {
-			return Wins.Straight_Flush.factor*coins;
-		}
-		else if (CheckForEquals(4, hand) == true) {
+//		if (straightFlush() == true) {
+//			return Wins.Straight_Flush.factor*coins;
+//		}
+		if (CheckForEquals(4, hand) == true) {
 			return Wins.Four_Of_A_Kind.factor*coins;
 		}
 		else if (checkForPairs(2, 3, hand) == true) {
@@ -187,6 +190,44 @@ public int getHandScore(int coins, List<Card> hand) {
 		else if (CheckForEquals(2, hand) == true) {
 			return Wins.Pair.factor*coins;
 		}
+		return 0;
 		
 	}
+
+// skapat metod checkforflush
+	
+	public boolean checkForFlush(List<Card>Hand) {
+	 
+			
+		
+			List<Card>cards = new ArrayList<>(Hand);
+			Card cardone = Hand.get(0);
+			
+			for(int i = 1; i < cards.size(); i++) {
+			
+				if(cardone.getSuit()!=cards.get(i).getSuit()) {
+					
+					
+				}
+					
+					
+			
+		
+			}
+			return true;
+			
+			
+	}
+
 }
+
+
+
+
+		
+							
+						
+	
+		
+
+
