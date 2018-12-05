@@ -170,7 +170,14 @@ public class VideoPoker {
 		else
 			return false;
 	}
-
+	public boolean checkStraightFlush(List<Card> test) {
+		System.out.println(CheckForStraight(test));
+		System.out.println(checkForFlush(test));
+		if (CheckForStraight(test) == true && checkForFlush(test) ==true ) {
+			return true;
+		}
+		else return false;
+	}
 	public int calculateValueOfCard(Card card) {
 
 		int value = 2;
@@ -188,14 +195,17 @@ public class VideoPoker {
 
 public int getHandScore(int coins, List<Card> hand) {
 	
-//		if (straightFlush() == true) {
-//			return Wins.Straight_Flush.factor*coins;
-//		}
+		if (checkStraightFlush(hand) == true) {
+			return Wins.Straight_Flush.factor*coins;
+		}
 		if (CheckForEquals(4, hand) == true) {
 			return Wins.Four_Of_A_Kind.factor*coins;
 		}
 		else if (checkForPairs(2, 3, hand) == true) {
 			return Wins.Full_House.factor*coins;
+		}
+		else if (checkForFlush(hand) == true) {
+			return Wins.Flush.factor*coins;
 		}
 		else if (CheckForStraight(hand) == true) {
 			return Wins.Straight.factor*coins;
