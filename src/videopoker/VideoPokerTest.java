@@ -19,8 +19,8 @@ public class VideoPokerTest {
 		hand.add(new Card(Suit.HEARTS, "Two"));
 		hand.add(new Card(Suit.SPADES, "Two"));
 		hand.add(new Card(Suit.DIAMONDS, "Five"));
-		hand.add(new Card(Suit.SPADES, "Seven"));
-		hand.add(new Card(Suit.CLUBS, "Eight"));
+		hand.add(new Card(Suit.SPADES, "Two"));
+		hand.add(new Card(Suit.CLUBS, "Two"));
 		
 		assertTrue(video.CheckForEquals(2, hand));
 		
