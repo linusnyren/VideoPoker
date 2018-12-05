@@ -1,7 +1,7 @@
 package videopoker;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -164,6 +164,12 @@ public class VideoPokerTest {
 	void testHandSize() {
 		Deck test = new Deck(); // Playerhand metoden kommer flyttas till UI sen
 		assertTrue(test.playerHand().size() == 5);
+	}
+	@Test
+	void testWins() {
+//		System.out.println(Wins.Straight_Flush);
+		Wins winning = Wins.Straight_Flush;
+		assertEquals(40, winning.factor, "Testwins()");
 	}
 	
 
