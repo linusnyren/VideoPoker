@@ -12,69 +12,56 @@ public class VideoPoker {
 	 */
 
 	public boolean checkForPairs(int a, int b, List<Card> hand) {
-		boolean par = false,tvåpar = false ,tretal = false;
+		boolean par = false, tvåpar = false, tretal = false;
 		sortCards(hand);
-		//Par
-		if 	(hand.get(0).getRank().equals(hand.get(1).getRank()) ||
-			hand.get(1).getRank().equals(hand.get(2).getRank())  ||
-			hand.get(2).getRank().equals(hand.get(3).getRank())  ||
-			hand.get(3).getRank().equals(hand.get(4).getRank()))
-		{
-		par = true;
+		// Par
+		if (hand.get(0).getRank().equals(hand.get(1).getRank()) || hand.get(1).getRank().equals(hand.get(2).getRank())
+				|| hand.get(2).getRank().equals(hand.get(3).getRank())
+				|| hand.get(3).getRank().equals(hand.get(4).getRank())) {
+			par = true;
+		} else {
+			par = false;
 		}
+
+		// Två par
+		if (hand.get(0).getRank().equals(hand.get(1).getRank()) && hand.get(2).getRank().equals(hand.get(3).getRank())
+				|| hand.get(0).getRank().equals(hand.get(1).getRank())
+						&& hand.get(3).getRank().equals(hand.get(4).getRank())
+				|| hand.get(1).getRank().equals(hand.get(2).getRank())
+						&& hand.get(3).getRank().equals(hand.get(4).getRank())) {
+			tvåpar = true;
+		}
+
 		else {
-		par = false;
+			tvåpar = false;
 		}
 
-		//Två par
-		if (hand.get(0).getRank().equals(hand.get(1).getRank()) &&
-			hand.get(2).getRank().equals(hand.get(3).getRank())
-			||
-			hand.get(0).getRank().equals(hand.get(1).getRank()) &&
-			hand.get(3).getRank().equals(hand.get(4).getRank())
-			||
-			hand.get(1).getRank().equals(hand.get(2).getRank()) &&
-			hand.get(3).getRank().equals(hand.get(4).getRank()))	
-		{
-		tvåpar=true;	
-		}
-		
-		 else {
-			tvåpar=false;
-		}
-
-	//Tre-tal
-		if (	hand.get(0).getRank().equals(hand.get(1).getRank()) &&
-				hand.get(1).getRank().equals(hand.get(2).getRank()) &&
-				!hand.get(4).getRank().equals(hand.get(3).getRank())&&
-				!hand.get(4).getRank().equals(hand.get(2).getRank())&&
-				!hand.get(3).getRank().equals(hand.get(2).getRank()) 
-				||
-				hand.get(1).getRank().equals(hand.get(2).getRank()) &&
-				hand.get(2).getRank().equals(hand.get(3).getRank()) &&
-				!hand.get(0).getRank().equals(hand.get(1).getRank())&&
-				!hand.get(0).getRank().equals(hand.get(4).getRank())&&
-				!hand.get(3).getRank().equals(hand.get(4).getRank())
-				||
-				hand.get(2).getRank().equals(hand.get(3).getRank()) &&
-				hand.get(3).getRank().equals(hand.get(4).getRank()) &&
-				!hand.get(0).getRank().equals(hand.get(1).getRank())&&
-				!hand.get(0).getRank().equals(hand.get(2).getRank())&&
-				!hand.get(4).getRank().equals(hand.get(1).getRank()))
-		{
+		// Tre-tal
+		if (hand.get(0).getRank().equals(hand.get(1).getRank()) && hand.get(1).getRank().equals(hand.get(2).getRank())
+				&& !hand.get(4).getRank().equals(hand.get(3).getRank())
+				&& !hand.get(4).getRank().equals(hand.get(2).getRank())
+				&& !hand.get(3).getRank().equals(hand.get(2).getRank())
+				|| hand.get(1).getRank().equals(hand.get(2).getRank())
+						&& hand.get(2).getRank().equals(hand.get(3).getRank())
+						&& !hand.get(0).getRank().equals(hand.get(1).getRank())
+						&& !hand.get(0).getRank().equals(hand.get(4).getRank())
+						&& !hand.get(3).getRank().equals(hand.get(4).getRank())
+				|| hand.get(2).getRank().equals(hand.get(3).getRank())
+						&& hand.get(3).getRank().equals(hand.get(4).getRank())
+						&& !hand.get(0).getRank().equals(hand.get(1).getRank())
+						&& !hand.get(0).getRank().equals(hand.get(2).getRank())
+						&& !hand.get(4).getRank().equals(hand.get(1).getRank())) {
 			tretal = true;
-		}
-		else {
+		} else {
 			tretal = false;
 		}
 //			Kontrollerar tvåpar						Kontrollerar kåk											Kontrollerar kåk
-		if(a == 2 && b == 2 && tvåpar == true || a == 2 && b == 3 && par == true && tretal == true || a == 3 && b == 2 && par == true && tretal == true)
-	 {
-		return true;
-	}
-	else {
-		return false;
-	}
+		if (a == 2 && b == 2 && tvåpar == true || a == 2 && b == 3 && par == true && tretal == true
+				|| a == 3 && b == 2 && par == true && tretal == true) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public List<Card> sortCards(List<Card> handToSort) {
@@ -102,6 +89,7 @@ public class VideoPoker {
 				for (int j = 0; j < 4; j++) {
 					for (int x = 0; x < 4; x++) {
 						for (int k = 0; k < 4; k++) {
+							if( i!= j && j!=x && x!=k)
 							if (calculateValueOfCard(test.get(i)) == calculateValueOfCard(test.get(j)) 
 									&& calculateValueOfCard(test.get(j)) == calculateValueOfCard(test.get(x))
 									&& calculateValueOfCard(test.get(x)) == calculateValueOfCard(test.get(k))) {
@@ -111,31 +99,39 @@ public class VideoPoker {
 					}
 				}
 			}
+			return false;
 		}
 		
-		else if (par == 3) {
+		if (par == 3) {
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
 					for (int x = 0; x < 4; x++) {
+						if ( i != j && j != x) {
 						if (calculateValueOfCard(test.get(i)) == calculateValueOfCard(test.get(j)) && calculateValueOfCard(test.get(j)) == calculateValueOfCard(test.get(x))) {
 							return true;
+						}
 						}
 					}
 				}
 			}
+			return false;
 		}
 
-		else if (par == 2) {
+		if (par == 2) {
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
-					if (calculateValueOfCard(test.get(i)) == calculateValueOfCard(test.get(j))) {
-						return true;
+					if (i != j) {
+						if (calculateValueOfCard(test.get(i)) == calculateValueOfCard(test.get(j))) {
+							return true;
+							}
 					}
 				}
+				
 			}
+			return false;
 		}
-		return false;
-
+		else return false;
+		
 	}
 
 	public boolean CheckForStraight(List<Card> test) {
@@ -164,7 +160,7 @@ public class VideoPoker {
 
 		return -1;
 	}
-	
+
 //public int getHandScore(int coins, List<Card> hand) {
 //		
 //		if (royalFlush() == true) {
