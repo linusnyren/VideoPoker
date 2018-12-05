@@ -15,7 +15,7 @@ public class VideoPoker {
 		sortCards(hand);
 
 		for (Card card : hand) {
-			System.out.println(card);
+//			System.out.println(card);
 		}
 		
 		// Par
@@ -104,57 +104,28 @@ public class VideoPoker {
 	}
 
 	public boolean CheckForEquals(int par, List<Card> test) {
-		
+		int a = calculateValueOfCard(test.get(0));
+		int b = calculateValueOfCard(test.get(1));
+		int c = calculateValueOfCard(test.get(2));
+		int d = calculateValueOfCard(test.get(3));
+		int e = calculateValueOfCard(test.get(4));
 		if (par == 4) {
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 4; j++) {
-					for (int x = 0; x < 4; x++) {
-						for (int k = 0; k < 4; k++) {
-							if( i!= j && j!=x && x!=k)
-							if (calculateValueOfCard(test.get(i)) == calculateValueOfCard(test.get(j)) 
-									&& calculateValueOfCard(test.get(j)) == calculateValueOfCard(test.get(x))
-									&& calculateValueOfCard(test.get(x)) == calculateValueOfCard(test.get(k))) {
-								return true;
-							}
-						}
-					}
-				}
+			if (a == b && b == c && c == d || b == c && c == d && d == e) {
+				return true;
 			}
-			return false;
 		}
-		
 		if (par == 3) {
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 4; j++) {
-					for (int x = 0; x < 4; x++) {
-						if ( i != j && j != x) {
-						if (calculateValueOfCard(test.get(i)) == calculateValueOfCard(test.get(j)) && calculateValueOfCard(test.get(j)) == calculateValueOfCard(test.get(x))) {
-							return true;
-						}
-						}
-					}
-				}
+			if (a == c || b == d || c == e) {
+				return true;
 			}
-			return false;
 		}
 
 		if (par == 2) {
-
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 4; j++) {
-					if (i != j) {
-						if (calculateValueOfCard(test.get(i)) == calculateValueOfCard(test.get(j))) {
-							if(calculateValueOfCard(test.get(i)) >= 11) {
-							return true;
-							}
-						}
-					}
-				}
-				
+			if (a == b || b == c || c == d || d == e) {
+				return true;
 			}
-			return false;
 		}
-		else return false;
+		return false;
 		
 	}
 
@@ -171,8 +142,6 @@ public class VideoPoker {
 			return false;
 	}
 	public boolean checkStraightFlush(List<Card> test) {
-		System.out.println(CheckForStraight(test));
-		System.out.println(checkForFlush(test));
 		if (CheckForStraight(test) == true && checkForFlush(test) ==true ) {
 			return true;
 		}
@@ -196,27 +165,35 @@ public class VideoPoker {
 public int getHandScore(int coins, List<Card> hand) {
 	
 		if (checkStraightFlush(hand) == true) {
+//			System.out.printf("Straight flush ");
 			return Wins.Straight_Flush.factor*coins;
 		}
 		if (CheckForEquals(4, hand) == true) {
+//			System.out.printf("Four of a kind ");
 			return Wins.Four_Of_A_Kind.factor*coins;
 		}
-		else if (checkForPairs(2, 3, hand) == true) {
+		else if (checkForPairs(3, 2, hand) == true) {
+//			System.out.printf("Full house ");
 			return Wins.Full_House.factor*coins;
 		}
 		else if (checkForFlush(hand) == true) {
+//			System.out.printf ("Flush ");
 			return Wins.Flush.factor*coins;
 		}
 		else if (CheckForStraight(hand) == true) {
+//			System.out.printf("Straight ");
 			return Wins.Straight.factor*coins;
 		}
 		else if (CheckForEquals(3, hand) == true) {
+//			System.out.printf("three of a kind ");
 			return Wins.Three_Of_A_Kind.factor*coins;
 		}
 		else if (checkForPairs(2,2, hand) == true) {
+//			System.out.printf("Two pairs ");
 			return Wins.Two_Pairs.factor*coins;
 		}
 		else if (CheckForEquals(2, hand) == true) {
+//			System.out.printf("Pair ");
 			return Wins.Pair.factor*coins;
 		}
 		return 0;
@@ -226,26 +203,13 @@ public int getHandScore(int coins, List<Card> hand) {
 // skapat metod checkforflush
 	
 	public boolean checkForFlush(List<Card>Hand) {
-	 
+			for(int i = 1; i < Hand.size(); i++) {
 			
-		
-			List<Card>cards = new ArrayList<>(Hand);
-			Card cardone = Hand.get(0);
-			
-			for(int i = 1; i < cards.size(); i++) {
-			
-				if(cardone.getSuit()!=cards.get(i).getSuit()) {
-					
-					
+				if(!Hand.get(0).getSuit().equals(Hand.get(i).getSuit())) {
+					return false;
 				}
-					
-					
-			
-		
 			}
 			return true;
-			
-			
 	}
 
 }
