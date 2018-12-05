@@ -1,5 +1,6 @@
 package videopoker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VideoPoker {
@@ -28,5 +29,41 @@ public class VideoPoker {
 		
 		return -1;
 	}
-
+	
+	
+// skapat metod checkforflush
+	
+	public boolean checkForFlush(List<Card>Hand) {
+	 
+			
+		
+			List<Card>cards = new ArrayList<>(Hand);
+			Card cardone = Hand.get(0);
+			
+			for(int i = 1; i < cards.size(); i++) {
+			
+				if(cardone.getSuit()!=cards.get(i).getSuit()) {
+					
+					
+				}
+					
+					
+			
+		
+			}
+			return true;
+			
+			
+	}
 }
+
+
+
+
+		
+							
+						
+	
+		
+
+
