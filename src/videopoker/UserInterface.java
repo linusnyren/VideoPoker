@@ -31,14 +31,18 @@ public class UserInterface extends JFrame {
 	private JButton getNewHand;
 	private JButton holdAndGetSecondHand;
 	
-//	Other variables
-	private int bet;
+//	Player
+	private Player player;
+	private Deck deck;
+	
 	
 	
 //	Constructor
 	public UserInterface () {
 		
 		setLayout(new BorderLayout());
+		
+		player = new Player(100, "John Doe");
 		
 //		Instatiate panels
 		topPanel = new JPanel();
@@ -53,19 +57,24 @@ public class UserInterface extends JFrame {
 		
 //		Add cards (JLabels) to centerLabel
 		cards = new JLabel [5];
+
 		
 		for (int i = 0 ; i < cards.length ; i++ ) {
-			cards[i] = new JLabel(); //Instantiates JLabels.
-			centerPanel.add(cards[i]); //Adds cards (JLabel) to centerPanel.
+			cards[i] = new JLabel();
+			centerPanel.add(cards[i]);
 			cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_spades.jpg")));
 			cards[i].addMouseListener(l);
 		}
+		
 		
 //		Add buttons
 		getNewHand = new JButton("New hand");
 		holdAndGetSecondHand = new JButton("Hold - Get new cards");
 		topPanel.add(getNewHand);
 		bottomPanel.add(holdAndGetSecondHand);
+		
+//		Add button listeners
+		getNewHand.addActionListener( e -> getNewHand());
 		
 //		Final settings
 		pack();
@@ -104,6 +113,26 @@ public class UserInterface extends JFrame {
 		
 		
 	}
+	
+	
+//	Get new hand
+	public void getNewHand() {
+		
+		deck = new Deck(); //Instantiate new deck
+
+		
+		for (int i = 0 ; i < cards.length ; i++ ) {
+			Card card = deck.draw();
+			player.addCardToHand(card);
+			cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_hearts.jpg")));
+		}
+		
+		for (Card card : player.getHand()) {
+			System.out.println(card);
+		}
+		
+	}
+	
 	
 //	Method for saving player
 	public void savePlayer() {
