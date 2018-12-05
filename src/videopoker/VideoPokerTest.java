@@ -57,6 +57,11 @@ public class VideoPokerTest {
 		assertTrue(video.CheckForStraight(hand));
 		
 	}
+	@Test 
+	void testHandSize() {
+		Deck test = new Deck(); // Playerhand metoden kommer flyttas till UI sen
+		assertTrue(test.playerHand().size() == 5);
+	}
 	
 
 }

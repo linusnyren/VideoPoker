@@ -24,6 +24,14 @@ public class Deck {
 		shuffle();
 		
 	}
+	//Denna skall flyttas till UI klassen sen!!!
+	public List<Card> playerHand(){
+		List<Card> playerhand = new ArrayList();
+		for (int i = 0; i < 5; i++) {
+			playerhand.add(draw());
+		}
+		return playerhand;			
+	}
 	
 	public Card draw(){
 //		Metod som returnerar ett kort och sedan plockar bort det från "kortleken".
