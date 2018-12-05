@@ -1,7 +1,6 @@
 package videopoker;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class VideoPoker {
@@ -13,7 +12,11 @@ public class VideoPoker {
 
 	public boolean checkForPairs(int a, int b, List<Card> hand) {
 		boolean par = false,tvåpar = false ,tretal = false;
+	
 		sortCards(hand);
+		for (Card card : hand) {
+			System.out.println(card);
+		}
 		//Par
 		if 	(hand.get(0).getRank().equals(hand.get(1).getRank()) ||
 			hand.get(1).getRank().equals(hand.get(2).getRank())  ||
@@ -44,25 +47,37 @@ public class VideoPoker {
 		}
 
 	//Tre-tal
+		boolean t1,t2,t3;
 		if (	hand.get(0).getRank().equals(hand.get(1).getRank()) &&
 				hand.get(1).getRank().equals(hand.get(2).getRank()) &&
 				!hand.get(4).getRank().equals(hand.get(3).getRank())&&
 				!hand.get(4).getRank().equals(hand.get(2).getRank())&&
-				!hand.get(3).getRank().equals(hand.get(2).getRank()) 
-				||
+				!hand.get(3).getRank().equals(hand.get(2).getRank())) 
+		{t1 = true;}
+			else {t1 = false;}
+
+		if (
 				hand.get(1).getRank().equals(hand.get(2).getRank()) &&
 				hand.get(2).getRank().equals(hand.get(3).getRank()) &&
 				!hand.get(0).getRank().equals(hand.get(1).getRank())&&
 				!hand.get(0).getRank().equals(hand.get(4).getRank())&&
-				!hand.get(3).getRank().equals(hand.get(4).getRank())
-				||
-				hand.get(2).getRank().equals(hand.get(3).getRank()) &&
+				!hand.get(3).getRank().equals(hand.get(4).getRank()))
+		{t2 = true;}
+		else {t2 = false;}
+		
+		if(
+		hand.get(2).getRank().equals(hand.get(3).getRank()) &&
 				hand.get(3).getRank().equals(hand.get(4).getRank()) &&
 				!hand.get(0).getRank().equals(hand.get(1).getRank())&&
 				!hand.get(0).getRank().equals(hand.get(2).getRank())&&
 				!hand.get(4).getRank().equals(hand.get(1).getRank()))
-		{
-			tretal = true;
+		{t3 = true;}
+		else{ t3 = false;}
+
+		System.out.println(t1);
+		System.out.println(t2);
+		System.out.println(t3);
+		if (t1 == true && t2 == true && t3 == true) {
 		}
 		else {
 			tretal = false;
