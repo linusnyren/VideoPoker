@@ -96,17 +96,42 @@ public class VideoPoker {
 	}
 
 	public boolean CheckForEquals(int par, List<Card> test) {
-
-		if (par == 3) {
-			if (calculateValueOfCard(test.get(0)) == calculateValueOfCard(test.get(1))
-					&& calculateValueOfCard(test.get(1)) == calculateValueOfCard(test.get(2))) {
-				return true;
+		
+		if (par == 4) {
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 4; j++) {
+					for (int x = 0; x < 4; x++) {
+						for (int k = 0; k < 4; k++) {
+							if (calculateValueOfCard(test.get(i)) == calculateValueOfCard(test.get(j)) 
+									&& calculateValueOfCard(test.get(j)) == calculateValueOfCard(test.get(x))
+									&& calculateValueOfCard(test.get(x)) == calculateValueOfCard(test.get(k))) {
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		else if (par == 3) {
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 4; j++) {
+					for (int x = 0; x < 4; x++) {
+						if (calculateValueOfCard(test.get(i)) == calculateValueOfCard(test.get(j)) && calculateValueOfCard(test.get(j)) == calculateValueOfCard(test.get(x))) {
+							return true;
+						}
+					}
+				}
 			}
 		}
 
 		else if (par == 2) {
-			if (calculateValueOfCard(test.get(0)) == calculateValueOfCard(test.get(1))) {
-				return true;
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 4; j++) {
+					if (calculateValueOfCard(test.get(i)) == calculateValueOfCard(test.get(j))) {
+						return true;
+					}
+				}
 			}
 		}
 		return false;
@@ -139,4 +164,26 @@ public class VideoPoker {
 
 		return -1;
 	}
+	
+//public int getHandScore(int coins, List<Card> hand) {
+//		
+//		if (royalFlush() == true) {
+//			return 250*coins;
+//		}
+//		else if (straightFlush() == true) {
+//			return 50*coins;
+//		}
+//		else if (fourOfAKind() == true) {
+//			return 25*coins;
+//		}
+//		else if (checkForPairs(2, 3, hand) == true) {
+//			return 9*coins;
+//		}
+//		else if (CheckForStraight(hand) == true) {
+//			return 4*coins;
+//		}
+//		else if (CheckForEquals(3, hand) == true) {
+//			return 3*coins;
+//		}
+//	}
 }

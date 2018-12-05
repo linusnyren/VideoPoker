@@ -1,5 +1,5 @@
 package videopoker;
-
+i
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,9 +19,11 @@ public class VideoPokerTest {
 		List<Card> hand = new ArrayList<>();
 		hand.add(new Card(Suit.HEARTS, "Five"));
 		hand.add(new Card(Suit.SPADES, "Two"));
-		hand.add(new Card(Suit.DIAMONDS, "Two"));
-		hand.add(new Card(Suit.SPADES, "Seven"));
-		hand.add(new Card(Suit.CLUBS, "Eight"));
+
+		hand.add(new Card(Suit.DIAMONDS, "Five"));
+		hand.add(new Card(Suit.SPADES, "Two"));
+		hand.add(new Card(Suit.CLUBS, "Two"));
+
 		
 		assertTrue(video.CheckForEquals(2, hand));
 		
