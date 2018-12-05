@@ -7,12 +7,12 @@ public class Main {
 	public static void main(String[] args) {
 
 		
-	VideoPoker video = new VideoPoker();
+//	VideoPoker video = new VideoPoker();
 
 		
 		
 		
-	}
+		
 
 
 	}
