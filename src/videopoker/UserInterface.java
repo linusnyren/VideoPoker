@@ -58,23 +58,24 @@ public class UserInterface extends JFrame {
 //		Add cards (JLabels) to centerLabel
 		cards = new JLabel [5];
 
-		
+//		Create labels for cards and add listeners	
 		for (int i = 0 ; i < cards.length ; i++ ) {
 			cards[i] = new JLabel();
 			centerPanel.add(cards[i]);
-			cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_spades.jpg")));
 			cards[i].addMouseListener(l);
 		}
 		
 		
-//		Add buttons
+//		Instantiate and add buttons
 		getNewHand = new JButton("New hand");
 		holdAndGetSecondHand = new JButton("Hold - Get new cards");
 		topPanel.add(getNewHand);
 		bottomPanel.add(holdAndGetSecondHand);
+		holdAndGetSecondHand.setEnabled(false); //Inactivate get second hand.
 		
 //		Add button listeners
 		getNewHand.addActionListener( e -> getNewHand());
+		holdAndGetSecondHand.addActionListener( e -> holdAndGetNewCards());
 		
 //		Final settings
 		pack();
@@ -119,11 +120,14 @@ public class UserInterface extends JFrame {
 	public void getNewHand() {
 		
 		deck = new Deck(); //Instantiate new deck
-
+		
+		getNewHand.setEnabled(false); //Inactivate the get new hand button.
+		holdAndGetSecondHand.setEnabled(true); //Enable button for second hand.
 		
 		for (int i = 0 ; i < cards.length ; i++ ) {
 			Card card = deck.draw();
 			player.addCardToHand(card);
+//			TODO: replace static filename with filename provided by card.
 			cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_hearts.jpg")));
 		}
 		
@@ -132,6 +136,34 @@ public class UserInterface extends JFrame {
 		}
 		
 	}
+	
+	public void holdAndGetNewCards () {
+		
+		getNewHand.setEnabled(true); //Enable new game button
+		holdAndGetSecondHand.setEnabled(false); //Inactivate get second hand.
+		
+	
+		for (int i = 0 ; i < cards.length ; i++ ) {
+			if (cards[i].getBorder() != border) {
+				Card card = deck.draw();
+				player.addCardToHand(card);
+//				TODO: replace static filename with filename provided by card.
+				cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_clubs.jpg")));
+			}
+			
+			cards[i].setBorder(null); //Resets the border. 
+			
+			
+		}
+		
+		for (Card card : player.getHand()) {
+			System.out.println(card);
+		}
+		
+	}
+	
+//	Method checks if border is activated (for second round and replaces cards that are not chosen. 
+	
 	
 	
 //	Method for saving player
