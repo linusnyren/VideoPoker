@@ -3,7 +3,6 @@ package videopoker;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 public class VideoPoker {
 
 	/*
@@ -14,6 +13,11 @@ public class VideoPoker {
 	public boolean checkForPairs(int a, int b, List<Card> hand) {
 		boolean par = false, tvåpar = false, tretal = false;
 		sortCards(hand);
+
+		for (Card card : hand) {
+			System.out.println(card);
+		}
+		
 		// Par
 		if (hand.get(0).getRank().equals(hand.get(1).getRank()) || hand.get(1).getRank().equals(hand.get(2).getRank())
 				|| hand.get(2).getRank().equals(hand.get(3).getRank())
@@ -36,32 +40,49 @@ public class VideoPoker {
 			tvåpar = false;
 		}
 
-		// Tre-tal
-		if (hand.get(0).getRank().equals(hand.get(1).getRank()) && hand.get(1).getRank().equals(hand.get(2).getRank())
-				&& !hand.get(4).getRank().equals(hand.get(3).getRank())
-				&& !hand.get(4).getRank().equals(hand.get(2).getRank())
-				&& !hand.get(3).getRank().equals(hand.get(2).getRank())
-				|| hand.get(1).getRank().equals(hand.get(2).getRank())
-						&& hand.get(2).getRank().equals(hand.get(3).getRank())
-						&& !hand.get(0).getRank().equals(hand.get(1).getRank())
-						&& !hand.get(0).getRank().equals(hand.get(4).getRank())
-						&& !hand.get(3).getRank().equals(hand.get(4).getRank())
-				|| hand.get(2).getRank().equals(hand.get(3).getRank())
-						&& hand.get(3).getRank().equals(hand.get(4).getRank())
-						&& !hand.get(0).getRank().equals(hand.get(1).getRank())
-						&& !hand.get(0).getRank().equals(hand.get(2).getRank())
-						&& !hand.get(4).getRank().equals(hand.get(1).getRank())) {
-			tretal = true;
-		} else {
+	//Tre-tal
+		boolean t1,t2,t3;
+		if (	hand.get(0).getRank().equals(hand.get(1).getRank()) &&
+				hand.get(1).getRank().equals(hand.get(2).getRank()) &&
+				!hand.get(3).getRank().equals(hand.get(0).getRank())&&
+				!hand.get(4).getRank().equals(hand.get(0).getRank())) 
+		{t1 = true;}
+			else {t1 = false;}
+
+		if (
+				hand.get(1).getRank().equals(hand.get(2).getRank()) &&
+				hand.get(2).getRank().equals(hand.get(3).getRank()) &&
+				!hand.get(0).getRank().equals(hand.get(1).getRank())&&
+				!hand.get(4).getRank().equals(hand.get(1).getRank()))
+		{t2 = true;}
+		else {t2 = false;}
+		
+		if(
+				hand.get(2).getRank().equals(hand.get(3).getRank()) &&
+				hand.get(3).getRank().equals(hand.get(4).getRank()) &&
+				!hand.get(0).getRank().equals(hand.get(2).getRank())&&
+				!hand.get(1).getRank().equals(hand.get(2).getRank())
+				)
+		{t3 = true;}
+		else{ t3 = false;}
+
+//		System.out.println(t1);
+//		System.out.println(t2);
+//		System.out.println(t3);
+//		
+		if (t1 == true || t2 == true || t3 == true) {
+			tretal=true;
+		}
+		else {
 			tretal = false;
 		}
 //			Kontrollerar tvåpar						Kontrollerar kåk											Kontrollerar kåk
-		if (a == 2 && b == 2 && tvåpar == true || a == 2 && b == 3 && par == true && tretal == true
-				|| a == 3 && b == 2 && par == true && tretal == true) {
+		if (a == 2 && b == 2 && tvåpar == true || a == 2 && b == 3 && par == true && tretal == true|| a == 3 && b == 2 && par == true && tretal == true) {
 			return true;
 		} else {
 			return false;
 		}
+		
 	}
 
 	public List<Card> sortCards(List<Card> handToSort) {
@@ -118,12 +139,15 @@ public class VideoPoker {
 		}
 
 		if (par == 2) {
+
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
 					if (i != j) {
 						if (calculateValueOfCard(test.get(i)) == calculateValueOfCard(test.get(j))) {
+							if(calculateValueOfCard(test.get(i)) >= 11) {
 							return true;
 							}
+						}
 					}
 				}
 				
@@ -161,25 +185,68 @@ public class VideoPoker {
 		return -1;
 	}
 
-//public int getHandScore(int coins, List<Card> hand) {
-//		
-//		if (royalFlush() == true) {
-//			return 250*coins;
+
+public int getHandScore(int coins, List<Card> hand) {
+	
+//		if (straightFlush() == true) {
+//			return Wins.Straight_Flush.factor*coins;
 //		}
-//		else if (straightFlush() == true) {
-//			return 50*coins;
-//		}
-//		else if (fourOfAKind() == true) {
-//			return 25*coins;
-//		}
-//		else if (checkForPairs(2, 3, hand) == true) {
-//			return 9*coins;
-//		}
-//		else if (CheckForStraight(hand) == true) {
-//			return 4*coins;
-//		}
-//		else if (CheckForEquals(3, hand) == true) {
-//			return 3*coins;
-//		}
-//	}
+		if (CheckForEquals(4, hand) == true) {
+			return Wins.Four_Of_A_Kind.factor*coins;
+		}
+		else if (checkForPairs(2, 3, hand) == true) {
+			return Wins.Full_House.factor*coins;
+		}
+		else if (CheckForStraight(hand) == true) {
+			return Wins.Straight.factor*coins;
+		}
+		else if (CheckForEquals(3, hand) == true) {
+			return Wins.Three_Of_A_Kind.factor*coins;
+		}
+		else if (checkForPairs(2,2, hand) == true) {
+			return Wins.Two_Pairs.factor*coins;
+		}
+		else if (CheckForEquals(2, hand) == true) {
+			return Wins.Pair.factor*coins;
+		}
+		return 0;
+		
+	}
+
+// skapat metod checkforflush
+	
+	public boolean checkForFlush(List<Card>Hand) {
+	 
+			
+		
+			List<Card>cards = new ArrayList<>(Hand);
+			Card cardone = Hand.get(0);
+			
+			for(int i = 1; i < cards.size(); i++) {
+			
+				if(cardone.getSuit()!=cards.get(i).getSuit()) {
+					
+					
+				}
+					
+					
+			
+		
+			}
+			return true;
+			
+			
+	}
+
 }
+
+
+
+
+		
+							
+						
+	
+		
+
+
