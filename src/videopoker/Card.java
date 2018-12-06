@@ -1,17 +1,22 @@
 package videopoker;
 
+import javax.swing.ImageIcon;
+
 public class Card {
 	
 	private String rank;
 	private Suit suit;
-	public static String filename = "2_of_hearts.jpg";
+	public ImageIcon filename;
 	
+	public ImageIcon getFileName() {
+		return filename;
+	}
 	
 //	Konstruktor
 	public Card (Suit suit, String rank) {
 		this.suit = suit;
 		this.rank = rank;
-		
+		createFilename();
 	}
 
 
@@ -38,7 +43,7 @@ public class Card {
 	}
 	
 	private void createFilename() {
-		
+		filename = new ImageIcon(getClass().getResource("/" + getRank() + "_of_" + getSuit() + ".jpg"));
 	}
 	
 

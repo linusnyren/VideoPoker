@@ -17,7 +17,7 @@ public class Deck {
 //		Fyll kortleken med kort (baserat på Suit och ranks[] ovan).
 		for (Suit suit : Suit.values() ) {
 			for (int i = 0 ; i < ranks.length ; i++ ) {
-				deckOfCards.add(new Card(suit, ranks[i] ));
+				deckOfCards.add(new Card(suit, ranks[i]));
 			}
 		}
 //		Avsluta med att blanda kortleken
