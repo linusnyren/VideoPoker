@@ -17,14 +17,14 @@ public class VideoPokerTest {
 		VideoPoker video = new VideoPoker();
 		
 		List<Card> hand = new ArrayList<>();
-		hand.add(new Card(Suit.HEARTS, "Five"));
+		hand.add(new Card(Suit.HEARTS, "5"));
 		hand.add(new Card(Suit.SPADES, "Jack"));
 
 		hand.add(new Card(Suit.DIAMONDS, "Jack"));
-		hand.add(new Card(Suit.SPADES, "Six"));
+		hand.add(new Card(Suit.SPADES, "6"));
 		hand.add(new Card(Suit.CLUBS, "Queen"));
 
-//		Will only accept twoPair with jacks or better
+//		Will only accept 2Pair with jacks or better
 		assertTrue(video.CheckForEquals(2, hand));
 		
 	}
@@ -36,11 +36,11 @@ public class VideoPokerTest {
 		VideoPoker video = new VideoPoker();
 		
 		List<Card> hand = new ArrayList<>();
-		hand.add(new Card(Suit.HEARTS, "Two"));
-		hand.add(new Card(Suit.SPADES, "Four"));
-		hand.add(new Card(Suit.DIAMONDS, "Five"));
-		hand.add(new Card(Suit.SPADES, "Seven"));
-		hand.add(new Card(Suit.CLUBS, "Eight"));
+		hand.add(new Card(Suit.HEARTS, "2"));
+		hand.add(new Card(Suit.SPADES, "4"));
+		hand.add(new Card(Suit.DIAMONDS, "5"));
+		hand.add(new Card(Suit.SPADES, "7"));
+		hand.add(new Card(Suit.CLUBS, "8"));
 		
 		assertFalse(video.CheckForEquals(4, hand));
 		
@@ -53,11 +53,11 @@ public class VideoPokerTest {
 		VideoPoker video = new VideoPoker();
 		
 		List<Card> hand = new ArrayList<>();
-		hand.add(new Card(Suit.HEARTS, "Two"));
-		hand.add(new Card(Suit.HEARTS, "Three"));
-		hand.add(new Card(Suit.HEARTS, "Five"));
-		hand.add(new Card(Suit.HEARTS, "Seven"));
-		hand.add(new Card(Suit.HEARTS, "Eight"));
+		hand.add(new Card(Suit.HEARTS, "2"));
+		hand.add(new Card(Suit.HEARTS, "3"));
+		hand.add(new Card(Suit.HEARTS, "5"));
+		hand.add(new Card(Suit.HEARTS, "7"));
+		hand.add(new Card(Suit.HEARTS, "8"));
 		
 		assertTrue(video.checkForFlush(hand));
 		
@@ -69,11 +69,11 @@ public class VideoPokerTest {
 		VideoPoker video = new VideoPoker();
 		
 		List<Card> hand = new ArrayList<>();
-		hand.add(new Card(Suit.HEARTS, "Two"));
-		hand.add(new Card(Suit.SPADES, "Three"));
-		hand.add(new Card(Suit.DIAMONDS, "Four"));
-		hand.add(new Card(Suit.SPADES, "Five"));
-		hand.add(new Card(Suit.CLUBS, "Six"));
+		hand.add(new Card(Suit.HEARTS, "2"));
+		hand.add(new Card(Suit.SPADES, "3"));
+		hand.add(new Card(Suit.DIAMONDS, "4"));
+		hand.add(new Card(Suit.SPADES, "5"));
+		hand.add(new Card(Suit.CLUBS, "6"));
 		
 		assertTrue(video.CheckForStraight(hand));
 		
@@ -85,11 +85,11 @@ public class VideoPokerTest {
 		VideoPoker video = new VideoPoker();
 		
 		List<Card> hand = new ArrayList<>();
-		hand.add(new Card(Suit.HEARTS, "Two"));
-		hand.add(new Card(Suit.SPADES, "Three"));
-		hand.add(new Card(Suit.DIAMONDS, "Three"));
-		hand.add(new Card(Suit.SPADES, "Five"));
-		hand.add(new Card(Suit.CLUBS, "Six"));
+		hand.add(new Card(Suit.HEARTS, "2"));
+		hand.add(new Card(Suit.SPADES, "3"));
+		hand.add(new Card(Suit.DIAMONDS, "3"));
+		hand.add(new Card(Suit.SPADES, "5"));
+		hand.add(new Card(Suit.CLUBS, "6"));
 		
 		assertFalse(video.CheckForStraight(hand));	
 
@@ -101,11 +101,11 @@ public class VideoPokerTest {
 		VideoPoker video = new VideoPoker();
 		
 		List<Card> hand = new ArrayList<>();
-		hand.add(new Card(Suit.HEARTS, "Two"));
-		hand.add(new Card(Suit.SPADES, "Three"));
-		hand.add(new Card(Suit.DIAMONDS, "Three"));
-		hand.add(new Card(Suit.SPADES, "Two"));
-		hand.add(new Card(Suit.CLUBS, "Three"));
+		hand.add(new Card(Suit.HEARTS, "2"));
+		hand.add(new Card(Suit.SPADES, "3"));
+		hand.add(new Card(Suit.DIAMONDS, "3"));
+		hand.add(new Card(Suit.SPADES, "2"));
+		hand.add(new Card(Suit.CLUBS, "3"));
 		
 		assertTrue(video.checkForPairs(3, 2, hand));
 	
@@ -117,43 +117,43 @@ public class VideoPokerTest {
 		VideoPoker video = new VideoPoker();
 		
 		List<Card> hand = new ArrayList<>();
-		hand.add(new Card(Suit.HEARTS, "Two"));
-		hand.add(new Card(Suit.SPADES, "Four"));
-		hand.add(new Card(Suit.DIAMONDS, "Three"));
-		hand.add(new Card(Suit.SPADES, "Two"));
-		hand.add(new Card(Suit.CLUBS, "Three"));
+		hand.add(new Card(Suit.HEARTS, "2"));
+		hand.add(new Card(Suit.SPADES, "4"));
+		hand.add(new Card(Suit.DIAMONDS, "3"));
+		hand.add(new Card(Suit.SPADES, "2"));
+		hand.add(new Card(Suit.CLUBS, "3"));
 		
 		assertFalse(video.checkForPairs(3, 2, hand));
 	
 	}
 	
 	@Test
-	void testForTwoPairs() {
+	void testFor2Pairs() {
 		
 		VideoPoker video = new VideoPoker();
 		
 		List<Card> hand = new ArrayList<>();
-		hand.add(new Card(Suit.HEARTS, "Two"));
-		hand.add(new Card(Suit.SPADES, "Five"));
-		hand.add(new Card(Suit.DIAMONDS, "Three"));
-		hand.add(new Card(Suit.SPADES, "Two"));
-		hand.add(new Card(Suit.CLUBS, "Three"));
+		hand.add(new Card(Suit.HEARTS, "2"));
+		hand.add(new Card(Suit.SPADES, "5"));
+		hand.add(new Card(Suit.DIAMONDS, "3"));
+		hand.add(new Card(Suit.SPADES, "2"));
+		hand.add(new Card(Suit.CLUBS, "3"));
 		
 		assertTrue(video.checkForPairs(2, 2, hand));
 		
 	}
 	
 	@Test
-	void testForTwoPairFalse() {
+	void testFor2PairFalse() {
 		
 		VideoPoker video = new VideoPoker();
 		
 		List<Card> hand = new ArrayList<>();
-		hand.add(new Card(Suit.HEARTS, "Two"));
-		hand.add(new Card(Suit.SPADES, "Five"));
-		hand.add(new Card(Suit.DIAMONDS, "Four"));
-		hand.add(new Card(Suit.SPADES, "Two"));
-		hand.add(new Card(Suit.CLUBS, "Three"));
+		hand.add(new Card(Suit.HEARTS, "2"));
+		hand.add(new Card(Suit.SPADES, "5"));
+		hand.add(new Card(Suit.DIAMONDS, "4"));
+		hand.add(new Card(Suit.SPADES, "2"));
+		hand.add(new Card(Suit.CLUBS, "3"));
 		
 		assertFalse(video.checkForPairs(2, 2, hand));
 		
@@ -175,11 +175,11 @@ public class VideoPokerTest {
 	void testStraightFlush() {
 		VideoPoker video = new VideoPoker();
 		List<Card> hand = new ArrayList<>();
-		hand.add(new Card(Suit.HEARTS, "Two"));
-		hand.add(new Card(Suit.HEARTS, "Three"));
-		hand.add(new Card(Suit.HEARTS, "Four"));
-		hand.add(new Card(Suit.HEARTS, "Five"));
-		hand.add(new Card(Suit.HEARTS, "Six"));
+		hand.add(new Card(Suit.HEARTS, "2"));
+		hand.add(new Card(Suit.HEARTS, "3"));
+		hand.add(new Card(Suit.HEARTS, "4"));
+		hand.add(new Card(Suit.HEARTS, "5"));
+		hand.add(new Card(Suit.HEARTS, "6"));
 		
 		assertTrue(video.checkStraightFlush(hand));
 	}
@@ -190,21 +190,21 @@ public class VideoPokerTest {
 		VideoPoker video = new VideoPoker();
 		List<Card> hand0 = new ArrayList<>();
 		hand0.add(new Card(Suit.HEARTS, "Jack"));
-		hand0.add(new Card(Suit.CLUBS, "Five"));
-		hand0.add(new Card(Suit.CLUBS, "Four"));
+		hand0.add(new Card(Suit.CLUBS, "5"));
+		hand0.add(new Card(Suit.CLUBS, "4"));
 		hand0.add(new Card(Suit.HEARTS, "Jack"));
-		hand0.add(new Card(Suit.CLUBS, "Three"));
+		hand0.add(new Card(Suit.CLUBS, "3"));
 		boolean a = false;
 		if (1 == video.getHandScore(hand0)) {
 			a = true;
 			}
 //		System.out.println("hand0 " +a);
 		List<Card> hand2 = new ArrayList<>();
-		hand2.add(new Card(Suit.HEARTS, "Two"));
-		hand2.add(new Card(Suit.CLUBS, "Three"));
-		hand2.add(new Card(Suit.HEARTS, "Four"));
-		hand2.add(new Card(Suit.CLUBS, "Two"));
-		hand2.add(new Card(Suit.HEARTS, "Three"));
+		hand2.add(new Card(Suit.HEARTS, "2"));
+		hand2.add(new Card(Suit.CLUBS, "3"));
+		hand2.add(new Card(Suit.HEARTS, "4"));
+		hand2.add(new Card(Suit.CLUBS, "2"));
+		hand2.add(new Card(Suit.HEARTS, "3"));
 		boolean b = false;
 		if (video.getHandScore(hand2) == 2) {
 			b = true;
@@ -212,11 +212,11 @@ public class VideoPokerTest {
 //		System.out.println("Hand2 " +b);
 
 		List<Card> hand3 = new ArrayList<>();
-		hand3.add(new Card(Suit.HEARTS, "Two"));
-		hand3.add(new Card(Suit.SPADES, "Five"));
-		hand3.add(new Card(Suit.DIAMONDS, "Five"));
-		hand3.add(new Card(Suit.SPADES, "Two"));
-		hand3.add(new Card(Suit.CLUBS, "Five"));
+		hand3.add(new Card(Suit.HEARTS, "2"));
+		hand3.add(new Card(Suit.SPADES, "5"));
+		hand3.add(new Card(Suit.DIAMONDS, "5"));
+		hand3.add(new Card(Suit.SPADES, "2"));
+		hand3.add(new Card(Suit.CLUBS, "5"));
 		boolean c = false;
 		if (video.getHandScore(hand3) == 9) {
 			c = true;
@@ -224,11 +224,11 @@ public class VideoPokerTest {
 //		System.out.println("Hand3 " +c);
 
 		List<Card> hand4 = new ArrayList<>();
-		hand4.add(new Card(Suit.HEARTS, "Two"));
-		hand4.add(new Card(Suit.CLUBS, "Three"));
-		hand4.add(new Card(Suit.HEARTS, "Four"));
-		hand4.add(new Card(Suit.CLUBS, "Five"));
-		hand4.add(new Card(Suit.HEARTS, "Six"));
+		hand4.add(new Card(Suit.HEARTS, "2"));
+		hand4.add(new Card(Suit.CLUBS, "3"));
+		hand4.add(new Card(Suit.HEARTS, "4"));
+		hand4.add(new Card(Suit.CLUBS, "5"));
+		hand4.add(new Card(Suit.HEARTS, "6"));
 		boolean d = false;
 		if (video.getHandScore(hand4) == 5) {
 			d = true;
@@ -236,11 +236,11 @@ public class VideoPokerTest {
 //		System.out.println("Hand4 " +d);
 
 		List<Card> hand5 = new ArrayList<>();
-		hand5.add(new Card(Suit.HEARTS, "Two"));
+		hand5.add(new Card(Suit.HEARTS, "2"));
 		hand5.add(new Card(Suit.HEARTS, "Jack"));
-		hand5.add(new Card(Suit.HEARTS, "Three"));
-		hand5.add(new Card(Suit.HEARTS, "Four"));
-		hand5.add(new Card(Suit.HEARTS, "Three"));
+		hand5.add(new Card(Suit.HEARTS, "3"));
+		hand5.add(new Card(Suit.HEARTS, "4"));
+		hand5.add(new Card(Suit.HEARTS, "3"));
 		boolean e = false;
 		if (video.getHandScore(hand5) == 6) {
 			e = true;
@@ -248,11 +248,11 @@ public class VideoPokerTest {
 //		System.out.println("Hand5 " +e);
 
 		List<Card> hand6 = new ArrayList<>();
-		hand6.add(new Card(Suit.HEARTS, "Two"));
-		hand6.add(new Card(Suit.CLUBS, "Three"));
-		hand6.add(new Card(Suit.HEARTS, "Three"));
-		hand6.add(new Card(Suit.CLUBS, "Two"));
-		hand6.add(new Card(Suit.HEARTS, "Three"));
+		hand6.add(new Card(Suit.HEARTS, "2"));
+		hand6.add(new Card(Suit.CLUBS, "3"));
+		hand6.add(new Card(Suit.HEARTS, "3"));
+		hand6.add(new Card(Suit.CLUBS, "2"));
+		hand6.add(new Card(Suit.HEARTS, "3"));
 		boolean f = false;
 		if (video.getHandScore(hand6) == 9) {
 			f = true;
@@ -260,11 +260,11 @@ public class VideoPokerTest {
 //		System.out.println("Hand6 " +f);
 
 		List<Card> hand7 = new ArrayList<>();
-		hand7.add(new Card(Suit.HEARTS, "Two"));
-		hand7.add(new Card(Suit.CLUBS, "Three"));
-		hand7.add(new Card(Suit.HEARTS, "Three"));
-		hand7.add(new Card(Suit.CLUBS, "Three"));
-		hand7.add(new Card(Suit.HEARTS, "Three"));
+		hand7.add(new Card(Suit.HEARTS, "2"));
+		hand7.add(new Card(Suit.CLUBS, "3"));
+		hand7.add(new Card(Suit.HEARTS, "3"));
+		hand7.add(new Card(Suit.CLUBS, "3"));
+		hand7.add(new Card(Suit.HEARTS, "3"));
 		boolean g = false;
 		if (video.getHandScore(hand7) == 20) {
 			g = true;
@@ -272,11 +272,11 @@ public class VideoPokerTest {
 //		System.out.println("Hand7 " +g);
 
 		List<Card> hand8 = new ArrayList<>();
-		hand8.add(new Card(Suit.HEARTS, "Two"));
-		hand8.add(new Card(Suit.HEARTS, "Three"));
-		hand8.add(new Card(Suit.HEARTS, "Four"));
-		hand8.add(new Card(Suit.HEARTS, "Five"));
-		hand8.add(new Card(Suit.HEARTS, "Six"));
+		hand8.add(new Card(Suit.HEARTS, "2"));
+		hand8.add(new Card(Suit.HEARTS, "3"));
+		hand8.add(new Card(Suit.HEARTS, "4"));
+		hand8.add(new Card(Suit.HEARTS, "5"));
+		hand8.add(new Card(Suit.HEARTS, "6"));
 		boolean h = false;
 		if (video.getHandScore(hand8) == 40) {
 			h = true;

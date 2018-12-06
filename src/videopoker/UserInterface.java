@@ -175,7 +175,7 @@ public class UserInterface extends JFrame {
 		}
 		
 		
-		System.out.println(video.getHandScore(1, player.getHand()));
+		System.out.println(video.getHandScore(player.getHand()));
 		
 		System.out.println();
 		player.clearHand();
