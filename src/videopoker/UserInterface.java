@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -86,6 +87,8 @@ public class UserInterface extends JFrame {
 		getNewHand.addActionListener( e -> getNewHand());
 		holdAndGetSecondHand.addActionListener( e -> holdAndGetNewCards());
 		
+		player.setCredits(0);
+		makeBet();
 //		Final settings
 		pack();
 		setVisible(true);
@@ -143,10 +146,10 @@ public class UserInterface extends JFrame {
 		}
 
 		for (Card card : player.getHand()) {
-			System.out.println(card);
+//			System.out.println(card);
 		}
 		
-		System.out.println();
+//		System.out.println();
 	}
 	
 	public void holdAndGetNewCards () {
@@ -169,21 +172,22 @@ public class UserInterface extends JFrame {
 			
 			
 			
-//			TODO: Check if player won and (if applicable) make payout.
-			
+
 			
 		}
+//		TODO: Check if player won and (if applicable) make payout.
+//		System.out.println("Multipel från getHandScore() " +video.getHandScore(player.getHand()));
+		getRoundResult();
 		
-		for (Card card : player.getHand()) {
-			System.out.println(card);
-		}
 		
-		
-		System.out.println(video.getHandScore(player.getHand()));
-		
-		System.out.println();
 		player.clearHand();
 		
+		
+		
+//		for (Card card : player.getHand()) {
+//			System.out.println(card);
+//		}
+	
 	}
 	
 //	Method checks if border is activated (for second round and replaces cards that are not chosen. 
@@ -201,14 +205,31 @@ public class UserInterface extends JFrame {
 	
 //	Make bet
 	public void makeBet () {
-		
-		
-		
-		
-		
+		player.setLastBet(Integer.parseInt(JOptionPane.showInputDialog("Credits below 1, Make your bet!")));
 		
 	}
+	public void checkCredits() {
+		if (player.getCredits() < 1) {
+			System.out.println("Player credits below 1");
+			makeBet();
+		}
+		else {System.out.println("checkForCredits " +player.getCredits());}
+	}
+	public void getRoundResult() {
+		if (video.getHandScore(player.getHand()) > 0) {
+			int money = video.getHandScore(player.getHand()) * player.getLastbet();
+			System.out.println("Lastbet(); * getHandScore(): " +money);
+			player.setCredits(player.getCredits() + money);
+			System.out.println("Player credit: " +(player.getCredits()+money));
+		}
+		else {
+			player.setCredits(player.getCredits() - 10);
+			checkCredits();
+		}
+		
 	
+	
+	}
 	
 	
 
