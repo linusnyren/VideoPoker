@@ -6,6 +6,12 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,7 +30,7 @@ public class UserInterface extends JFrame {
 	
 //	JLabels and variabels for playing cards
 	private JLabel [] cards;
-	private String filepath = "C:\\Users\\ceder\\Documents\\Yrgo filer\\Agila metoder\\Projektarbete\\Playing_Cards_Small\\JPEG\\";
+//	private String filepath = "C:\\Users\\ceder\\Documents\\Yrgo filer\\Agila metoder\\Projektarbete\\Playing_Cards_Small\\JPEG\\";
 	private Border border = new LineBorder(Color.BLACK, 2);
 	
 //	Components
@@ -33,6 +39,7 @@ public class UserInterface extends JFrame {
 	
 //	Player
 	private Player player;
+	private VideoPoker video;
 	private Deck deck;
 	
 	
@@ -43,6 +50,7 @@ public class UserInterface extends JFrame {
 		setLayout(new BorderLayout());
 		
 		player = new Player(100, "John Doe");
+		video = new VideoPoker();
 		
 //		Instatiate panels
 		topPanel = new JPanel();
@@ -106,13 +114,14 @@ public class UserInterface extends JFrame {
 	};
 	
 //	Method for getting player
-	public void loadPlayer () {
-	
+	public void loadPlayer () throws IOException, ClassNotFoundException {
 		
-		
-		
-		
-		
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("default_player"));
+			player = (Player) ois.readObject();
+		} catch (FileNotFoundException fnf) {
+			player = new Player(1000, "John Doe");
+		}
 	}
 	
 	
@@ -131,6 +140,11 @@ public class UserInterface extends JFrame {
 			cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_hearts.jpg")));
 		}
 
+		for (Card card : player.getHand()) {
+			System.out.println(card);
+		}
+		
+		System.out.println();
 	}
 	
 	public void holdAndGetNewCards () {
@@ -143,17 +157,29 @@ public class UserInterface extends JFrame {
 			if (cards[i].getBorder() != border) {
 				player.removeCardFromHand(i); 	// Remove the card that the player does not want to keep
 				Card card = deck.draw(); 		//Draws new card 
-				player.addCardToHand(card);		//Adds the card to the hand.
+				player.addCardToHand(i, card);		//Adds the card to the hand.
 //				TODO: replace static filename with filename provided by card.
 				cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_clubs.jpg")));
 			}
 			
 			cards[i].setBorder(null); //Resets the border. 
 			
+			
+			
 //			TODO: Check if player won and (if applicable) make payout.
 			
 			
 		}
+		
+		for (Card card : player.getHand()) {
+			System.out.println(card);
+		}
+		
+		
+		System.out.println(video.getHandScore(1, player.getHand()));
+		
+		System.out.println();
+		player.clearHand();
 		
 	}
 	
@@ -162,14 +188,11 @@ public class UserInterface extends JFrame {
 	
 	
 //	Method for saving player
-	public void savePlayer() {
+	public void savePlayer() throws FileNotFoundException, IOException {
 		
-		
-		
-		
-		
-		
-		
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("default_player"));
+		oos.writeObject(player);
+
 	}
 	
 	

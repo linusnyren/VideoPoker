@@ -1,9 +1,10 @@
 package videopoker;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player implements Serializable {
 		private int credits;
 		private int lastBet;
 		private String userName;
@@ -47,8 +48,16 @@ public class Player {
 			hand.add(card);
 		}
 		
+		public void addCardToHand (int position, Card card) {
+			hand.add(position, card);
+		}
+		
 		public void removeCardFromHand (int index) {
 			hand.remove(index);
+		}
+		
+		public void clearHand() {
+			hand.clear();
 		}
 		
 		
