@@ -30,7 +30,6 @@ public class UserInterface extends JFrame {
 	
 //	JLabels and variabels for playing cards
 	private JLabel [] cards;
-//	private String filepath = "C:\\Users\\ceder\\Documents\\Yrgo filer\\Agila metoder\\Projektarbete\\Playing_Cards_Small\\JPEG\\";
 	private Border border = new LineBorder(Color.BLACK, 2);
 	
 //	Components
