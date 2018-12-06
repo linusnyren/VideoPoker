@@ -121,12 +121,13 @@ public class VideoPoker {
 		}
 
 		if (par == 2) {
-			if (a == b || b == c || c == d || d == e) {
-				return true;
-			}
+			for (int i = 0; i < test.size()-1; i++) {
+				if (test.get(i).getRank().equals(test.get(i+1).getRank()) == true && calculateValueOfCard(test.get(i)) > 10) {
+					return true;
+				}
+			}		
 		}
 		return false;
-		
 	}
 
 	public boolean CheckForStraight(List<Card> test) {
@@ -162,39 +163,40 @@ public class VideoPoker {
 	}
 
 
-public int getHandScore(int coins, List<Card> hand) {
-	
+public int getHandScore(List<Card> hand) {
+		sortCards(hand);
+		
 		if (checkStraightFlush(hand) == true) {
 //			System.out.printf("Straight flush ");
-			return Wins.Straight_Flush.factor*coins;
+			return Wins.Straight_Flush.factor;
 		}
 		if (CheckForEquals(4, hand) == true) {
 //			System.out.printf("Four of a kind ");
-			return Wins.Four_Of_A_Kind.factor*coins;
+			return Wins.Four_Of_A_Kind.factor;
 		}
 		else if (checkForPairs(3, 2, hand) == true) {
 //			System.out.printf("Full house ");
-			return Wins.Full_House.factor*coins;
+			return Wins.Full_House.factor;
 		}
 		else if (checkForFlush(hand) == true) {
 //			System.out.printf ("Flush ");
-			return Wins.Flush.factor*coins;
+			return Wins.Flush.factor;
 		}
 		else if (CheckForStraight(hand) == true) {
 //			System.out.printf("Straight ");
-			return Wins.Straight.factor*coins;
+			return Wins.Straight.factor;
 		}
 		else if (CheckForEquals(3, hand) == true) {
 //			System.out.printf("three of a kind ");
-			return Wins.Three_Of_A_Kind.factor*coins;
+			return Wins.Three_Of_A_Kind.factor;
 		}
 		else if (checkForPairs(2,2, hand) == true) {
 //			System.out.printf("Two pairs ");
-			return Wins.Two_Pairs.factor*coins;
+			return Wins.Two_Pairs.factor;
 		}
 		else if (CheckForEquals(2, hand) == true) {
 //			System.out.printf("Pair ");
-			return Wins.Pair.factor*coins;
+			return Wins.Pair.factor;
 		}
 		return 0;
 		
