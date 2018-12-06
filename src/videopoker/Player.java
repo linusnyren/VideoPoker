@@ -16,6 +16,9 @@ public class Player implements Serializable {
 			this.userName = userName;
 		}
 		
+		public void resetLastBet() {
+			lastBet = 0;
+		}
 		public int getCredits() {
 			return credits;
 		}
