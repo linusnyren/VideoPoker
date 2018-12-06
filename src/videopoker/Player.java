@@ -14,6 +14,7 @@ public class Player implements Serializable {
 		public Player(int credits, String userName) {
 			this.credits = credits;
 			this.userName = userName;
+			System.out.println("Player created");
 		}
 		
 		public int getCredits() {

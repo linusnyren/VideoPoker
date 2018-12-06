@@ -1,3 +1,4 @@
 # För att exkludera .classes filer m.m
 bin/
 src/videopoker/Main.java
+default_player

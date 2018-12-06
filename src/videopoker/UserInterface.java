@@ -44,11 +44,13 @@ public class UserInterface extends JFrame {
 	
 	
 //	Constructor
-	public UserInterface () {
+	public UserInterface () throws ClassNotFoundException, IOException {
 		
 		setLayout(new BorderLayout());
 		
-		player = new Player(100, "John Doe");
+//		player = new Player(100, "John Doe");
+		loadPlayer();
+		savePlayer();
 		video = new VideoPoker();
 		
 //		Instatiate panels
@@ -136,7 +138,7 @@ public class UserInterface extends JFrame {
 			Card card = deck.draw();	//Draws new card
 			player.addCardToHand(card); //Adds the cards to the player hand
 //			TODO: replace static filename with filename provided by card.
-			cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_hearts.jpg")));
+			cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_hearts.jpg"))); //Lägg card.getFileName() här;
 		}
 
 		for (Card card : player.getHand()) {
@@ -158,7 +160,7 @@ public class UserInterface extends JFrame {
 				Card card = deck.draw(); 		//Draws new card 
 				player.addCardToHand(i, card);		//Adds the card to the hand.
 //				TODO: replace static filename with filename provided by card.
-				cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_clubs.jpg")));
+				cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_clubs.jpg")));//Lägg card.getFileName() här;
 			}
 			
 			cards[i].setBorder(null); //Resets the border. 
