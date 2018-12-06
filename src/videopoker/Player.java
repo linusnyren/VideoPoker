@@ -17,6 +17,9 @@ public class Player implements Serializable {
 			System.out.println("Player created");
 		}
 		
+		public void resetLastBet() {
+			lastBet = 0;
+		}
 		public int getCredits() {
 			return credits;
 		}
