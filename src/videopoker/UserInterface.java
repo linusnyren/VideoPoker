@@ -148,15 +148,16 @@ public class UserInterface extends JFrame {
 		
 		deck = new Deck(); //Instantiate new deck
 		
+		
+		
 		getNewHand.setEnabled(false); //Inactivate the get new hand button.
 		holdAndGetSecondHand.setEnabled(true); //Enable button for second hand.
 		
 		for (int i = 0 ; i < cards.length ; i++ ) {
 			Card card = deck.draw();	//Draws new card
 			player.addCardToHand(card); //Adds the cards to the player hand
-//			TODO: replace static filename with filename provided by card.
-//			cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_clubs.jpg")));//Lägg card.getFileName() här;
-			cards[i].setIcon(card.getFileName()); //Lägg card.getFileName() här;
+			cards[i].setIcon(card.getFileName()); //Get image for card
+			cards[i].setBorder(null); //Resets the border. 
 		}
 
 		for (Card card : player.getHand()) {
@@ -177,9 +178,7 @@ public class UserInterface extends JFrame {
 				player.removeCardFromHand(i); 	// Remove the card that the player does not want to keep
 				Card card = deck.draw(); 		//Draws new card 
 				player.addCardToHand(i, card);		//Adds the card to the hand.
-//				TODO: replace static filename with filename provided by card.
-//				cards[i].setIcon(new ImageIcon(getClass().getResource("/2_of_clubs.jpg")));//Lägg card.getFileName() här;
-				cards[i].setIcon(card.getFileName()); //Lägg card.getFileName() här;
+				cards[i].setIcon(card.getFileName()); //Get image for card
 			}
 			
 			cards[i].setBorder(null); //Resets the border. 
@@ -248,6 +247,7 @@ public class UserInterface extends JFrame {
 			return;
 		}
 		
+//		"Open" the buttons for playing (and stop the player from changing bet).
 		getNewHand.setEnabled(true);
 		betThis.setEnabled(false);
 		makeBet.setEnabled(false);
