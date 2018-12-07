@@ -2,3 +2,4 @@
 bin/
 src/videopoker/Main.java
 default_player
+src/Main.java

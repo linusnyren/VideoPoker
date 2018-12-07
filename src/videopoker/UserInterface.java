@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -284,15 +286,14 @@ public class UserInterface extends JFrame {
 		playerCredits.setText(String.format("Player credits: %d", player.getCredits()));
 	}
 	public void musicTheme() {
-		Audio theme = new Audio();
-		if (music == false) {
-			music = true;
-		try {
-			theme.playSound("audio/music_theme.wav");
-			} 
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		if (theme_music.isSelected()) {
+			Audio theme = new Audio();
+			try {
+				theme.playSound("audio/music_theme.wav", 0.2);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
