@@ -17,7 +17,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
@@ -35,8 +37,11 @@ public class UserInterface extends JFrame {
 //	Components
 	private JButton getNewHand;
 	private JButton holdAndGetSecondHand;
+	private JButton saveAndQuit;
+	private JButton makeBet;
+	private JTextField betThis;
 	
-//	Player
+//	Player, game and deck.
 	private Player player;
 	private VideoPoker video;
 	private Deck deck;
@@ -59,7 +64,7 @@ public class UserInterface extends JFrame {
 		centerPanel.setPreferredSize(new Dimension (600, 200));
 		bottomPanel = new JPanel();
 		
-//		Add panels to JFrame
+//		Add panels to JFrame according to BorderLayout. 
 		add(topPanel, BorderLayout.NORTH);
 		add(centerPanel, BorderLayout.CENTER);
 		add(bottomPanel, BorderLayout.SOUTH);
@@ -75,16 +80,28 @@ public class UserInterface extends JFrame {
 		}
 		
 		
-//		Instantiate and add buttons
+//		Instantiate and add components (buttons and fields).
 		getNewHand = new JButton("New hand");
 		holdAndGetSecondHand = new JButton("Hold - Get new cards");
+		saveAndQuit = new JButton("Save & quit");
+		makeBet = new JButton("Make bet"); 
+		betThis = new JTextField(5);
+		
+		
+		topPanel.add(betThis);
+		topPanel.add(makeBet);
 		topPanel.add(getNewHand);
+		
 		bottomPanel.add(holdAndGetSecondHand);
+		bottomPanel.add(saveAndQuit);
+
 		holdAndGetSecondHand.setEnabled(false); //Inactivate get second hand.
+		getNewHand.setEnabled(false);
 		
 //		Add button listeners
 		getNewHand.addActionListener( e -> getNewHand());
 		holdAndGetSecondHand.addActionListener( e -> holdAndGetNewCards());
+		makeBet.addActionListener(e -> checkBet());
 		
 //		Final settings
 		pack();
@@ -165,7 +182,10 @@ public class UserInterface extends JFrame {
 			
 			cards[i].setBorder(null); //Resets the border. 
 			
-			
+//			Prepare for next round by activating the right buttons
+			getNewHand.setEnabled(false);
+			betThis.setEnabled(true);
+			makeBet.setEnabled(true);
 			
 //			TODO: Check if player won and (if applicable) make payout.
 			
@@ -184,10 +204,7 @@ public class UserInterface extends JFrame {
 		
 	}
 	
-//	Method checks if border is activated (for second round and replaces cards that are not chosen. 
-	
-	
-	
+
 //	Method for saving player
 	public void savePlayer() throws FileNotFoundException, IOException {
 		
@@ -196,14 +213,42 @@ public class UserInterface extends JFrame {
 
 	}
 	
-	
 //	Make bet
-	public void makeBet () {
+	public void makeBet (int bet) {
+		
+//	Metoden skall reducera spelarens (konto (credits) med "bet") och lägga "bet" i last bet
+//	på player. Vi kommer sedan att hämta lastBet i slutet av varje runda och göra eventuell utbetalning
 		
 		
 		
 		
 		
+	}
+	
+//	Check that the user has entered a valid bet.
+	public void checkBet() {
+		
+		int bet = 0;
+		
+//		Is the bet numeric?
+		try {
+			bet = Integer.parseInt(betThis.getText());
+		} catch (NumberFormatException nfe) {
+			betThis.setText("0");
+			JOptionPane.showMessageDialog(null, "Please enter valid bet");
+			return;
+		}
+		
+//		Is the bet within the players limits?
+		if (bet > player.getCredits()) {
+			betThis.setText("0");
+			JOptionPane.showMessageDialog(null, "You're trying to bet more than your holdings");
+			return;
+		}
+		
+		getNewHand.setEnabled(true);
+		betThis.setEnabled(false);
+		makeBet.setEnabled(false);
 		
 	}
 	
