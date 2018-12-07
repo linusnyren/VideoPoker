@@ -86,7 +86,8 @@ public class UserInterface extends JFrame {
 		saveAndQuit = new JButton("Save & quit");
 		makeBet = new JButton("Make bet"); 
 		betThis = new JTextField(5);
-		playerCredits = new JLabel(String.format("Player credits: %d", player.getCredits()));
+		playerCredits = new JLabel();
+		upDateScore(); //Checks and updates the credits
 		
 		
 		topPanel.add(playerCredits);
@@ -184,6 +185,7 @@ public class UserInterface extends JFrame {
 			cards[i].setBorder(null); //Resets the border. 
 			
 //			Prepare for next round by activating the right buttons
+//			TODO: Consider removing the getnewHandbutton - might be superfluous?
 			getNewHand.setEnabled(false);
 			betThis.setEnabled(true);
 			makeBet.setEnabled(true);
@@ -196,8 +198,6 @@ public class UserInterface extends JFrame {
 		
 		System.out.println();
 		player.clearHand();
-//		Save the players progress
-//		savePlayer();
 	}
 	
 
@@ -265,6 +265,11 @@ public class UserInterface extends JFrame {
 		System.exit(0); 		//Exit system.
 	}
 	
+//	Sets the credits to the current balance. 
+	public void upDateScore() {
+		playerCredits.setText(String.format("Player credits: %d", player.getCredits()));
+	}
+ 	
 	
 	
 
