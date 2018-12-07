@@ -40,6 +40,7 @@ public class UserInterface extends JFrame {
 	private JButton saveAndQuit;
 	private JButton makeBet;
 	private JTextField betThis;
+	private JLabel playerCredits;
 	
 //	Player, game and deck.
 	private Player player;
@@ -55,7 +56,6 @@ public class UserInterface extends JFrame {
 		
 //		player = new Player(100, "John Doe");
 		loadPlayer();
-		savePlayer();
 		video = new VideoPoker();
 		
 //		Instatiate panels
@@ -86,8 +86,10 @@ public class UserInterface extends JFrame {
 		saveAndQuit = new JButton("Save & quit");
 		makeBet = new JButton("Make bet"); 
 		betThis = new JTextField(5);
+		playerCredits = new JLabel(String.format("Player credits: %d", player.getCredits()));
 		
 		
+		topPanel.add(playerCredits);
 		topPanel.add(betThis);
 		topPanel.add(makeBet);
 		topPanel.add(getNewHand);
@@ -102,11 +104,13 @@ public class UserInterface extends JFrame {
 		getNewHand.addActionListener( e -> getNewHand());
 		holdAndGetSecondHand.addActionListener( e -> holdAndGetNewCards());
 		makeBet.addActionListener(e -> checkBet());
+		saveAndQuit.addActionListener(e -> saveAndQuit());
 		
 //		Final settings
 		pack();
 		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		setDefaultCloseOperation(EXIT_ON_CLOSE); 
 
 		
 	}
@@ -137,9 +141,10 @@ public class UserInterface extends JFrame {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("default_player"));
 			player = (Player) ois.readObject();
+			ois.close();
 		} catch (FileNotFoundException fnf) {
 			player = new Player(1000, "John Doe");
-		}
+		} 
 	}
 	
 	
@@ -160,11 +165,6 @@ public class UserInterface extends JFrame {
 			cards[i].setBorder(null); //Resets the border. 
 		}
 
-		for (Card card : player.getHand()) {
-			System.out.println(card);
-		}
-		
-		System.out.println();
 	}
 	
 	public void holdAndGetNewCards () {
@@ -187,30 +187,33 @@ public class UserInterface extends JFrame {
 			getNewHand.setEnabled(false);
 			betThis.setEnabled(true);
 			makeBet.setEnabled(true);
-			
-//			TODO: Check if player won and (if applicable) make payout.
-			
-			
+
 		}
-		
-		for (Card card : player.getHand()) {
-			System.out.println(card);
-		}
-		
+//		TODO: Check if player won and (if applicable) make payout.
+
 		
 		System.out.println(video.getHandScore(player.getHand()));
 		
 		System.out.println();
 		player.clearHand();
-		
+//		Save the players progress
+//		savePlayer();
 	}
 	
 
 //	Method for saving player
-	public void savePlayer() throws FileNotFoundException, IOException {
+	public void savePlayer()  {
 		
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("default_player"));
-		oos.writeObject(player);
+		ObjectOutputStream oos;
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream("default_player"));
+			oos.writeObject(player);
+			System.out.println("Player saved");
+			oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 
 	}
 	
@@ -252,6 +255,14 @@ public class UserInterface extends JFrame {
 		betThis.setEnabled(false);
 		makeBet.setEnabled(false);
 		
+	}
+	
+//	Lets the player quit and saves the player. 
+	public void saveAndQuit ()  {
+		player.resetLastBet(); 	//Resets the bets.	
+		player.clearHand();
+		savePlayer();
+		System.exit(0); 		//Exit system.
 	}
 	
 	

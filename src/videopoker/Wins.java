@@ -11,4 +11,5 @@ public enum Wins {
 	Wins (int wins) {
 		factor = wins;
 	}
+	
 }

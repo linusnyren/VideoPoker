@@ -1,6 +1,8 @@
 package videopoker;
 
-public enum Suit {
+import java.io.Serializable;
+
+public enum Suit implements Serializable {
 	
 	HEARTS, SPADES, DIAMONDS, CLUBS
 
