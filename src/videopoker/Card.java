@@ -1,8 +1,10 @@
 package videopoker;
 
+import java.io.Serializable;
+
 import javax.swing.ImageIcon;
 
-public class Card {
+public class Card implements Serializable {
 	
 	private String rank;
 	private Suit suit;

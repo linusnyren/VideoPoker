@@ -163,39 +163,47 @@ public class VideoPoker {
 	}
 
 
-public int getHandScore(List<Card> hand) {
+public int getHandScore(List<Card> hand) throws Exception {
 		sortCards(hand);
-		
+		Audio audio = new Audio();
 		if (checkStraightFlush(hand) == true) {
 //			System.out.printf("Straight flush ");
+			audio.playSound("audio/StraightFlush.wav");
 			return Wins.Straight_Flush.factor;
 		}
 		if (CheckForEquals(4, hand) == true) {
 //			System.out.printf("Four of a kind ");
+			audio.playSound("audio/FourOfAKind.wav");
 			return Wins.Four_Of_A_Kind.factor;
 		}
 		else if (checkForPairs(3, 2, hand) == true) {
 //			System.out.printf("Full house ");
+			audio.playSound("audio/FullHouse.wav");
 			return Wins.Full_House.factor;
 		}
 		else if (checkForFlush(hand) == true) {
 //			System.out.printf ("Flush ");
+			audio.playSound("audio/Flush.wav");
 			return Wins.Flush.factor;
 		}
 		else if (CheckForStraight(hand) == true) {
 //			System.out.printf("Straight ");
+			audio.playSound("audio/Straight.wav");
 			return Wins.Straight.factor;
 		}
 		else if (CheckForEquals(3, hand) == true) {
 //			System.out.printf("three of a kind ");
+			audio.playSound("audio/ThreeOfAKind.wav");
 			return Wins.Three_Of_A_Kind.factor;
 		}
 		else if (checkForPairs(2,2, hand) == true) {
 //			System.out.printf("Two pairs ");
+			audio.playSound("audio/TwoPair.wav");
 			return Wins.Two_Pairs.factor;
 		}
 		else if (CheckForEquals(2, hand) == true) {
 //			System.out.printf("Pair ");
+			audio.playSound("audio/Pair.wav");
 			return Wins.Pair.factor;
 		}
 		return 0;

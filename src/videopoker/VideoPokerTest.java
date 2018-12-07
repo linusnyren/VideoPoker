@@ -185,7 +185,7 @@ public class VideoPokerTest {
 	}
 	
 	@Test
-	void testHandScore() {
+	void testHandScore() throws Exception {
 		boolean ok = false;
 		VideoPoker video = new VideoPoker();
 		List<Card> hand0 = new ArrayList<>();
