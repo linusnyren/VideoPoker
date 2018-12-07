@@ -193,14 +193,20 @@ public class UserInterface extends JFrame {
 		}
 //		TODO: Check if player won and (if applicable) make payout.
 
-		
-		System.out.println(video.getHandScore(player.getHand()));
+		checkResult();
+//		System.out.println(video.getHandScore(player.getHand()));
 		
 		System.out.println();
 		player.clearHand();
 	}
-	
-
+	public void checkResult() {
+		try {
+			video.getHandScore(player.getHand());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 //	Method for saving player
 	public void savePlayer()  {
 		

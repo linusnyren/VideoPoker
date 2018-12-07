@@ -206,6 +206,7 @@ public int getHandScore(List<Card> hand) throws Exception {
 			audio.playSound("audio/Pair.wav");
 			return Wins.Pair.factor;
 		}
+		audio.playSound("audio/Loser.wav");
 		return 0;
 		
 	}
