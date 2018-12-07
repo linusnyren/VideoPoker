@@ -35,7 +35,7 @@ public class UserInterface extends JFrame {
 	private Border border = new LineBorder(Color.BLACK, 2);
 	
 //	Components
-	private JButton getNewHand;
+//	private JButton getNewHand;   TODO: Consider removing
 	private JButton holdAndGetSecondHand;
 	private JButton saveAndQuit;
 	private JButton makeBet;
@@ -54,7 +54,6 @@ public class UserInterface extends JFrame {
 		
 		setLayout(new BorderLayout());
 		
-//		player = new Player(100, "John Doe");
 		loadPlayer();
 		video = new VideoPoker();
 		
@@ -81,7 +80,7 @@ public class UserInterface extends JFrame {
 		
 		
 //		Instantiate and add components (buttons and fields).
-		getNewHand = new JButton("New hand");
+//		getNewHand = new JButton("New hand");  TODO: Consider removing
 		holdAndGetSecondHand = new JButton("Hold - Get new cards");
 		saveAndQuit = new JButton("Save & quit");
 		makeBet = new JButton("Make bet"); 
@@ -93,16 +92,16 @@ public class UserInterface extends JFrame {
 		topPanel.add(playerCredits);
 		topPanel.add(betThis);
 		topPanel.add(makeBet);
-		topPanel.add(getNewHand);
+//		topPanel.add(getNewHand);   TODO: Consider removing
 		
 		bottomPanel.add(holdAndGetSecondHand);
 		bottomPanel.add(saveAndQuit);
 
 		holdAndGetSecondHand.setEnabled(false); //Inactivate get second hand.
-		getNewHand.setEnabled(false);
+//		getNewHand.setEnabled(false); 	TODO: Consider removing
 		
 //		Add button listeners
-		getNewHand.addActionListener( e -> getNewHand());
+//		getNewHand.addActionListener( e -> getNewHand());		TODO: Consider removing
 		holdAndGetSecondHand.addActionListener( e -> holdAndGetNewCards());
 		makeBet.addActionListener(e -> checkBet());
 		saveAndQuit.addActionListener(e -> saveAndQuit());
@@ -122,7 +121,7 @@ public class UserInterface extends JFrame {
 		public void mouseClicked(MouseEvent e) {
 			
 			for (int i = 0 ; i < cards.length ; i++ ) {
-				if (e.getSource() == cards[i]) {
+				if (e.getSource() == cards[i] && makeBet.isEnabled() == false) { //Note: The player is only allowed to mark cards in round one (thereof the makeBet boolean)
 					if (cards[i].getBorder() == border) {
 						cards[i].setBorder(null);
 					} else {
@@ -156,7 +155,7 @@ public class UserInterface extends JFrame {
 		
 		
 		
-		getNewHand.setEnabled(false); //Inactivate the get new hand button.
+//		getNewHand.setEnabled(false); //Inactivate the get new hand button.  TODO: Consider removing
 		holdAndGetSecondHand.setEnabled(true); //Enable button for second hand.
 		
 		for (int i = 0 ; i < cards.length ; i++ ) {
@@ -170,7 +169,7 @@ public class UserInterface extends JFrame {
 	
 	public void holdAndGetNewCards () {
 		
-		getNewHand.setEnabled(true); //Enable new game button
+//		getNewHand.setEnabled(true); //Enable new game button TODO: Consider removing
 		holdAndGetSecondHand.setEnabled(false); //Inactivate get second hand.
 		
 	
@@ -180,13 +179,14 @@ public class UserInterface extends JFrame {
 				Card card = deck.draw(); 		//Draws new card 
 				player.addCardToHand(i, card);		//Adds the card to the hand.
 				cards[i].setIcon(card.getFileName()); //Get image for card
+				
 			}
 			
 			cards[i].setBorder(null); //Resets the border. 
 			
 //			Prepare for next round by activating the right buttons
 //			TODO: Consider removing the getnewHandbutton - might be superfluous?
-			getNewHand.setEnabled(false);
+//			getNewHand.setEnabled(false);				TODO: Consider removing
 			betThis.setEnabled(true);
 			makeBet.setEnabled(true);
 
@@ -251,9 +251,12 @@ public class UserInterface extends JFrame {
 		}
 		
 //		"Open" the buttons for playing (and stop the player from changing bet).
-		getNewHand.setEnabled(true);
+//		getNewHand.setEnabled(true); TODO: Consider removing
 		betThis.setEnabled(false);
 		makeBet.setEnabled(false);
+		
+//		Bet ok -> give player new hand
+		getNewHand();
 		
 	}
 	
