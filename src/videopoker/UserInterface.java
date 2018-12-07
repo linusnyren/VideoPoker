@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -41,12 +42,14 @@ public class UserInterface extends JFrame {
 	private JButton makeBet;
 	private JTextField betThis;
 	private JLabel playerCredits;
+	private JCheckBox theme_music;
 	
 //	Player, game and deck.
 	private Player player;
 	private VideoPoker video;
 	private Deck deck;
 	
+	private boolean music = false;
 	
 	
 //	Constructor
@@ -62,6 +65,7 @@ public class UserInterface extends JFrame {
 		centerPanel = new JPanel();
 		centerPanel.setPreferredSize(new Dimension (600, 200));
 		bottomPanel = new JPanel();
+		theme_music = new JCheckBox("Music Theme");
 		
 //		Add panels to JFrame according to BorderLayout. 
 		add(topPanel, BorderLayout.NORTH);
@@ -96,7 +100,8 @@ public class UserInterface extends JFrame {
 		
 		bottomPanel.add(holdAndGetSecondHand);
 		bottomPanel.add(saveAndQuit);
-
+		bottomPanel.add(theme_music);
+		
 		holdAndGetSecondHand.setEnabled(false); //Inactivate get second hand.
 //		getNewHand.setEnabled(false); 	TODO: Consider removing
 		
@@ -105,7 +110,7 @@ public class UserInterface extends JFrame {
 		holdAndGetSecondHand.addActionListener( e -> holdAndGetNewCards());
 		makeBet.addActionListener(e -> checkBet());
 		saveAndQuit.addActionListener(e -> saveAndQuit());
-		
+		theme_music.addActionListener(e -> musicTheme());
 //		Final settings
 		pack();
 		setVisible(true);
@@ -277,6 +282,19 @@ public class UserInterface extends JFrame {
 //	Sets the credits to the current balance. 
 	public void upDateScore() {
 		playerCredits.setText(String.format("Player credits: %d", player.getCredits()));
+	}
+	public void musicTheme() {
+		Audio theme = new Audio();
+		if (music == false) {
+			music = true;
+		try {
+			theme.playSound("audio/music_theme.wav");
+			} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+		}
 	}
  	
 	

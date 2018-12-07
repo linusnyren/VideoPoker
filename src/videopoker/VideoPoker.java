@@ -9,19 +9,26 @@ public class VideoPoker {
 	 * This class will contain the games intelligence. This will be epic
 	 * 
 	 */
+//	Hidden easteregg!
+//	Get thememusic by adding this to main
+//	Audio theme = new Audio();
+//	theme.playSound("audio/music_theme.wav");
 
 	public boolean checkForPairs(int a, int b, List<Card> hand) {
 		boolean par = false, tvåpar = false, tretal = false;
 		sortCards(hand);
+		Object obj0 = hand.get(0).getRank();
+		Object obj1 = hand.get(1).getRank();
+		Object obj2 = hand.get(2).getRank();
+		Object obj3 = hand.get(3).getRank();
+		Object obj4 = hand.get(4).getRank();
 
 		for (Card card : hand) {
 //			System.out.println(card);
 		}
 		
 		// Par
-		if (hand.get(0).getRank().equals(hand.get(1).getRank()) || hand.get(1).getRank().equals(hand.get(2).getRank())
-				|| hand.get(2).getRank().equals(hand.get(3).getRank())
-				|| hand.get(3).getRank().equals(hand.get(4).getRank())) {
+		if (obj0.equals(obj1) || obj1.equals(obj2) || obj2.equals(obj3) || obj3.equals(obj4)) {
 			par = true;
 		} else {
 			par = false;
