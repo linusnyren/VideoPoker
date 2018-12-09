@@ -3,6 +3,7 @@ package videopoker;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 public class VideoPoker {
 
 	/*
@@ -15,7 +16,7 @@ public class VideoPoker {
 //	theme.playSound("audio/music_theme.wav");
 
 	public boolean checkForPairs(int a, int b, List<Card> hand) {
-		boolean par = false, tvåpar = false, tretal = false;
+		boolean tvåpar = false, kåk = false, k1 = false, k2 = false;
 		sortCards(hand);
 		Object obj0 = hand.get(0).getRank();
 		Object obj1 = hand.get(1).getRank();
@@ -26,70 +27,45 @@ public class VideoPoker {
 		for (Card card : hand) {
 //			System.out.println(card);
 		}
-		
-		// Par
-		if (obj0.equals(obj1) || obj1.equals(obj2) || obj2.equals(obj3) || obj3.equals(obj4)) {
-			par = true;
-		} else {
-			par = false;
-		}
-
 		// Två par
-		if (hand.get(0).getRank().equals(hand.get(1).getRank()) && hand.get(2).getRank().equals(hand.get(3).getRank())
-				|| hand.get(0).getRank().equals(hand.get(1).getRank())
-						&& hand.get(3).getRank().equals(hand.get(4).getRank())
-				|| hand.get(1).getRank().equals(hand.get(2).getRank())
-						&& hand.get(3).getRank().equals(hand.get(4).getRank())) {
+		if (obj0.equals(obj1) && obj2.equals(obj3) || obj0.equals(obj1) && obj3.equals(obj4)
+				|| obj1.equals(obj2) && obj3.equals(obj4)) {
 			tvåpar = true;
 		}
 
 		else {
 			tvåpar = false;
 		}
-
-	//Tre-tal
-		boolean t1,t2,t3;
-		if (	hand.get(0).getRank().equals(hand.get(1).getRank()) &&
-				hand.get(1).getRank().equals(hand.get(2).getRank()) &&
-				!hand.get(3).getRank().equals(hand.get(0).getRank())&&
-				!hand.get(4).getRank().equals(hand.get(0).getRank())) 
-		{t1 = true;}
-			else {t1 = false;}
-
-		if (
-				hand.get(1).getRank().equals(hand.get(2).getRank()) &&
-				hand.get(2).getRank().equals(hand.get(3).getRank()) &&
-				!hand.get(0).getRank().equals(hand.get(1).getRank())&&
-				!hand.get(4).getRank().equals(hand.get(1).getRank()))
-		{t2 = true;}
-		else {t2 = false;}
 		
-		if(
-				hand.get(2).getRank().equals(hand.get(3).getRank()) &&
-				hand.get(3).getRank().equals(hand.get(4).getRank()) &&
-				!hand.get(0).getRank().equals(hand.get(2).getRank())&&
-				!hand.get(1).getRank().equals(hand.get(2).getRank())
-				)
-		{t3 = true;}
-		else{ t3 = false;}
 
-//		System.out.println(t1);
-//		System.out.println(t2);
-//		System.out.println(t3);
-//		
-		if (t1 == true || t2 == true || t3 == true) {
-			tretal=true;
-		}
-		else {
-			tretal = false;
-		}
-//			Kontrollerar tvåpar						Kontrollerar kåk											Kontrollerar kåk
-		if (a == 2 && b == 2 && tvåpar == true || a == 2 && b == 3 && par == true && tretal == true|| a == 3 && b == 2 && par == true && tretal == true) {
-			return true;
+		// kåk
+		if (obj0.equals(obj1) && obj2.equals(obj3) && obj3.equals(obj4)) {
+			k1 = true;
 		} else {
-			return false;
+			k1 = false;
 		}
+
+		if (obj0.equals(obj1) && obj1.equals(obj2) && obj3.equals(obj4)) {
+		k2 = true;}
+		else{
+		k2 = false;}
+
+		if (k1 == true || k2 == true) {
+			kåk = true;}
+			else {
+			kåk = false;
+			}
 		
+//			Kontrollerar tvåpar						Kontrollerar kåk					Kontrollerar kåk
+		if(a==2 && b== 2 && tvåpar == true || a == 2 && b == 3 && kåk == true ||  a == 3 && b == 2 && kåk == true)
+	{
+		return true;
+	}
+		else
+	{
+		return false;
+	}
+
 	}
 
 	public List<Card> sortCards(List<Card> handToSort) {
@@ -128,11 +104,12 @@ public class VideoPoker {
 		}
 
 		if (par == 2) {
-			for (int i = 0; i < test.size()-1; i++) {
-				if (test.get(i).getRank().equals(test.get(i+1).getRank()) == true && calculateValueOfCard(test.get(i)) > 10) {
+			for (int i = 0; i < test.size() - 1; i++) {
+				if (test.get(i).getRank().equals(test.get(i + 1).getRank()) == true
+						&& calculateValueOfCard(test.get(i)) > 10) {
 					return true;
 				}
-			}		
+			}
 		}
 		return false;
 	}
@@ -149,12 +126,14 @@ public class VideoPoker {
 		else
 			return false;
 	}
+
 	public boolean checkStraightFlush(List<Card> test) {
-		if (CheckForStraight(test) == true && checkForFlush(test) ==true ) {
+		if (CheckForStraight(test) == true && checkForFlush(test) == true) {
 			return true;
-		}
-		else return false;
+		} else
+			return false;
 	}
+
 	public int calculateValueOfCard(Card card) {
 
 		int value = 2;
@@ -169,8 +148,7 @@ public class VideoPoker {
 		return -1;
 	}
 
-
-public int getHandScore(List<Card> hand) throws Exception {
+	public int getHandScore(List<Card> hand) throws Exception {
 		sortCards(hand);
 		Audio audio = new Audio();
 		if (checkStraightFlush(hand) == true) {
@@ -182,63 +160,46 @@ public int getHandScore(List<Card> hand) throws Exception {
 //			System.out.printf("Four of a kind ");
 			audio.playSound("audio/FourOfAKind.wav", 1);
 			return Wins.Four_Of_A_Kind.factor;
-		}
-		else if (checkForPairs(3, 2, hand) == true) {
+		} else if (checkForPairs(3, 2, hand) == true) {
 //			System.out.printf("Full house ");
 			audio.playSound("audio/FullHouse.wav", 1);
 			return Wins.Full_House.factor;
-		}
-		else if (checkForFlush(hand) == true) {
+		} else if (checkForFlush(hand) == true) {
 //			System.out.printf ("Flush ");
 			audio.playSound("audio/Flush.wav", 1);
 			return Wins.Flush.factor;
-		}
-		else if (CheckForStraight(hand) == true) {
+		} else if (CheckForStraight(hand) == true) {
 //			System.out.printf("Straight ");
 			audio.playSound("audio/Straight.wav", 1);
 			return Wins.Straight.factor;
-		}
-		else if (CheckForEquals(3, hand) == true) {
+		} else if (CheckForEquals(3, hand) == true) {
 //			System.out.printf("three of a kind ");
 			audio.playSound("audio/ThreeOfAKind.wav", 1);
 			return Wins.Three_Of_A_Kind.factor;
-		}
-		else if (checkForPairs(2,2, hand) == true) {
+		} else if (checkForPairs(2, 2, hand) == true) {
 //			System.out.printf("Two pairs ");
 			audio.playSound("audio/TwoPair.wav", 1);
 			return Wins.Two_Pairs.factor;
-		}
-		else if (CheckForEquals(2, hand) == true) {
+		} else if (CheckForEquals(2, hand) == true) {
 //			System.out.printf("Pair ");
 			audio.playSound("audio/Pair.wav", 1);
 			return Wins.Pair.factor;
 		}
 		audio.playSound("audio/Loser.wav", 1);
 		return 0;
-		
+
 	}
 
 // skapat metod checkforflush
-	
-	public boolean checkForFlush(List<Card>Hand) {
-			for(int i = 1; i < Hand.size(); i++) {
-			
-				if(!Hand.get(0).getSuit().equals(Hand.get(i).getSuit())) {
-					return false;
-				}
+
+	public boolean checkForFlush(List<Card> Hand) {
+		for (int i = 1; i < Hand.size(); i++) {
+
+			if (!Hand.get(0).getSuit().equals(Hand.get(i).getSuit())) {
+				return false;
 			}
-			return true;
+		}
+		return true;
 	}
 
 }
-
-
-
-
-		
-							
-						
-	
-		
-
-
