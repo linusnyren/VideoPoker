@@ -260,12 +260,8 @@ public class UserInterface extends JFrame {
 //	Make bet
 	public void makeBet (int bet) {
 		
-//	Metoden skall reducera spelarens (konto (credits) med "bet") och lägga "bet" i last bet
-//	på player. Vi kommer sedan att hämta lastBet i slutet av varje runda och göra eventuell utbetalning
-		
-		player.setLastBet(5);	 //TODO: Change this. 	
-		
-		
+		player.setCredits(player.getCredits() - bet);
+		player.setLastBet(bet);
 		
 	}
 	
@@ -295,8 +291,9 @@ public class UserInterface extends JFrame {
 		betThis.setEnabled(false);
 		makeBet.setEnabled(false);
 		
-//		Bet ok -> give player new hand
-		makeBet(0); //TODO: Remove and fix
+//		Bet ok -> make bet -> updateScore
+		makeBet(bet); 
+		upDateScore();
 		getNewHand();
 		
 	}
