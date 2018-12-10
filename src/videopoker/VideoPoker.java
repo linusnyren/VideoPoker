@@ -10,11 +10,6 @@ public class VideoPoker {
 	 * This class will contain the games intelligence. This will be epic
 	 * 
 	 */
-//	Hidden easteregg!
-//	Get thememusic by adding this to main
-//	Audio theme = new Audio();
-//	theme.playSound("audio/music_theme.wav");
-
 	public boolean checkForPairs(int a, int b, List<Card> hand) {
 		boolean tvåpar = false, kåk = false, k1 = false, k2 = false;
 		sortCards(hand);
@@ -36,7 +31,6 @@ public class VideoPoker {
 		else {
 			tvåpar = false;
 		}
-		
 
 		// kåk
 		if (obj0.equals(obj1) && obj2.equals(obj3) && obj3.equals(obj4)) {
@@ -46,25 +40,23 @@ public class VideoPoker {
 		}
 
 		if (obj0.equals(obj1) && obj1.equals(obj2) && obj3.equals(obj4)) {
-		k2 = true;}
-		else{
-		k2 = false;}
+			k2 = true;
+		} else {
+			k2 = false;
+		}
 
 		if (k1 == true || k2 == true) {
-			kåk = true;}
-			else {
+			kåk = true;
+		} else {
 			kåk = false;
-			}
-		
+		}
+
 //			Kontrollerar tvåpar						Kontrollerar kåk					Kontrollerar kåk
-		if(a==2 && b== 2 && tvåpar == true || a == 2 && b == 3 && kåk == true ||  a == 3 && b == 2 && kåk == true)
-	{
-		return true;
-	}
-		else
-	{
-		return false;
-	}
+		if (a == 2 && b == 2 && tvåpar == true || a == 2 && b == 3 && kåk == true || a == 3 && b == 2 && kåk == true) {
+			return true;
+		} else {
+			return false;
+		}
 
 	}
 
@@ -148,6 +140,9 @@ public class VideoPoker {
 		return -1;
 	}
 
+//	I denna metod så körs metoderna i turordning från högst utbetalningtill
+//	lägsta utbetalning, där den nappar så spelas motsvarande ljud upp.
+//	Sen returneras multipeln för motsvarande ev vinst.
 	public int getHandScore(List<Card> hand, int volume) throws Exception {
 		sortCards(hand);
 		Audio audio = new Audio();
