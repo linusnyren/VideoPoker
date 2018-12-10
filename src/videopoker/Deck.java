@@ -25,14 +25,6 @@ public class Deck {
 		
 	}
 	//Denna skall flyttas till UI klassen sen!!!
-	public List<Card> playerHand(){
-		List<Card> playerhand = new ArrayList();
-		for (int i = 0; i < 5; i++) {
-			playerhand.add(draw());
-		}
-		return playerhand;			
-	}
-	
 	public Card draw(){
 //		Metod som returnerar ett kort och sedan plockar bort det från "kortleken".
 		if (!deckOfCards.isEmpty()) {
@@ -65,12 +57,9 @@ public class Deck {
 		
 	}
 	
-
 	public List<Card> getDeck() {
-//		Metod som tillåter testmetoder att komma åt deckOfCards
 		return deckOfCards; 
 	}
-	
 	
 	public static String [] getRanks () {
 		return ranks;

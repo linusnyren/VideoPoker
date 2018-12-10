@@ -159,12 +159,6 @@ public class VideoPokerTest {
 		
 	}
 	
-	
-	@Test 
-	void testHandSize() {
-		Deck test = new Deck(); // Playerhand metoden kommer flyttas till UI sen
-		assertTrue(test.playerHand().size() == 5);
-	}
 	@Test
 	void testWins() {
 //		System.out.println(Wins.Straight_Flush);

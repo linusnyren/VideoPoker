@@ -10,11 +10,9 @@ public class Player implements Serializable {
 		private String userName;
 		private List<Card> hand = new ArrayList<>();
 		
-		
 		public Player(int credits, String userName) {
 			this.credits = credits;
 			this.userName = userName;
-			System.out.println("Player created");
 		}
 		
 		public void resetLastBet() {
@@ -63,8 +61,4 @@ public class Player implements Serializable {
 		public void clearHand() {
 			hand.clear();
 		}
-		
-		
-		
-
 	}

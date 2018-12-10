@@ -14,10 +14,10 @@ public class Audio {
 	Clip clip;
 	  public void playSound(String filepath, double volume) throws Exception {
 
-		    Clip clip;
+//		    Clip clip;
 	    	File soundFile = new File(filepath);
 
-	        Line.Info linfo = new Line.Info(Clip.class);
+	        Line.Info linfo = new Line.Info(Clip.class); // Kolla exakt vad denna gör
 	        Line line = AudioSystem.getLine(linfo);
 	        clip = (Clip) line;
 	        AudioInputStream ais = AudioSystem.getAudioInputStream(soundFile);

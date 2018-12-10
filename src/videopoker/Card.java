@@ -46,6 +46,7 @@ public class Card implements Serializable {
 	
 	private void createFilename() {
 		filename = new ImageIcon(getClass().getResource("/" + getRank() + "_of_" + getSuit() + ".jpg"));
+//								 resource                /    2		       _of_    hearts       .jpg  
 	}
 	
 

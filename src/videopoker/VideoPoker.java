@@ -19,9 +19,6 @@ public class VideoPoker {
 		Object obj3 = hand.get(3).getRank();
 		Object obj4 = hand.get(4).getRank();
 
-		for (Card card : hand) {
-//			System.out.println(card);
-		}
 		// Två par
 		if (obj0.equals(obj1) && obj2.equals(obj3) || obj0.equals(obj1) && obj3.equals(obj4)
 				|| obj1.equals(obj2) && obj3.equals(obj4)) {
@@ -73,19 +70,19 @@ public class VideoPoker {
 				}
 			}
 		}
-
 		return handToSort;
-
 	}
 
 	public boolean CheckForEquals(int par, List<Card> test) {
+		sortCards(test);
 		int a = calculateValueOfCard(test.get(0));
 		int b = calculateValueOfCard(test.get(1));
 		int c = calculateValueOfCard(test.get(2));
 		int d = calculateValueOfCard(test.get(3));
 		int e = calculateValueOfCard(test.get(4));
+		
 		if (par == 4) {
-			if (a == b && b == c && c == d || b == c && c == d && d == e) {
+			if (a == d || b == e) {
 				return true;
 			}
 		}
@@ -107,6 +104,7 @@ public class VideoPoker {
 	}
 
 	public boolean CheckForStraight(List<Card> test) {
+		sortCards(test);
 		int a = calculateValueOfCard(test.get(0));
 		int b = calculateValueOfCard(test.get(1));
 		int c = calculateValueOfCard(test.get(2));
@@ -174,7 +172,6 @@ public class VideoPoker {
 		}
 		audio.playSound("audio/Loser.wav", volume);
 		return 0;
-
 	}
 
 // skapat metod checkforflush
@@ -188,5 +185,4 @@ public class VideoPoker {
 		}
 		return true;
 	}
-
 }
