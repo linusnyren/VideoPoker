@@ -212,18 +212,22 @@ public class UserInterface extends JFrame {
 			makeBet.setEnabled(true);
 
 		}
-//		TODO: Check if player won and (if applicable) make payout.
 
-		checkResult();
-//		System.out.println(video.getHandScore(player.getHand()));
-		
-		System.out.println();
+//		Check result, multiply by winnings. Update score when payout is made. 
+		int payout = checkResult() * player.getLastbet();
+		player.setCredits(player.getCredits() + payout);
+		upDateScore();
+
 		player.clearHand();
 	}
-	public void checkResult() {
+	public int checkResult() {
+		
+		int result = 0;
+		
 		try {
 
-			video.getHandScore(player.getHand(), volume);
+			result = video.getHandScore(player.getHand(), volume);
+			
 
 //			video.getHandScore(player.getHand());
 //			TODO: Change return to int? Needs to be calculated with the bet
@@ -232,6 +236,9 @@ public class UserInterface extends JFrame {
 			e.printStackTrace();
 			System.out.println("ERROR!! Couldn´t get score");
 		}
+		
+		return result;
+		
 		}
 //	Method for saving player
 	public void savePlayer()  {
@@ -256,7 +263,7 @@ public class UserInterface extends JFrame {
 //	Metoden skall reducera spelarens (konto (credits) med "bet") och lägga "bet" i last bet
 //	på player. Vi kommer sedan att hämta lastBet i slutet av varje runda och göra eventuell utbetalning
 		
-		
+		player.setLastBet(5);	 //TODO: Change this. 	
 		
 		
 		
@@ -289,6 +296,7 @@ public class UserInterface extends JFrame {
 		makeBet.setEnabled(false);
 		
 //		Bet ok -> give player new hand
+		makeBet(0); //TODO: Remove and fix
 		getNewHand();
 		
 	}
