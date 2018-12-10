@@ -33,6 +33,7 @@ public class Audio {
 
 	    public void update(LineEvent le) {
 	        LineEvent.Type type = le.getType();
+//	        System.out.println(type.toString());
 	        JComponent playingDialog = null;
 			if (type == LineEvent.Type.OPEN) {
 	            System.out.println("OPEN");

@@ -45,6 +45,7 @@ public class UserInterface extends JFrame {
 	private JTextField betThis;
 	private JLabel playerCredits;
 	private JCheckBox theme_music;
+	private JCheckBox soundFX;
 	
 //	Player, game and deck.
 	private Player player;
@@ -53,7 +54,7 @@ public class UserInterface extends JFrame {
 	
 	private boolean music = false;
 	
-	
+	private int volume = 0;
 //	Constructor
 	public UserInterface () throws ClassNotFoundException, IOException {
 		
@@ -68,6 +69,7 @@ public class UserInterface extends JFrame {
 		centerPanel.setPreferredSize(new Dimension (600, 200));
 		bottomPanel = new JPanel();
 		theme_music = new JCheckBox("Music Theme");
+		soundFX = new JCheckBox("SoundFX");
 		
 //		Add panels to JFrame according to BorderLayout. 
 		add(topPanel, BorderLayout.NORTH);
@@ -103,6 +105,7 @@ public class UserInterface extends JFrame {
 		bottomPanel.add(holdAndGetSecondHand);
 		bottomPanel.add(saveAndQuit);
 		bottomPanel.add(theme_music);
+		bottomPanel.add(soundFX);
 		
 		holdAndGetSecondHand.setEnabled(false); //Inactivate get second hand.
 //		getNewHand.setEnabled(false); 	TODO: Consider removing
@@ -112,7 +115,9 @@ public class UserInterface extends JFrame {
 		holdAndGetSecondHand.addActionListener( e -> holdAndGetNewCards());
 		makeBet.addActionListener(e -> checkBet());
 		saveAndQuit.addActionListener(e -> saveAndQuit());
+		soundFX.addActionListener(e -> enableSoundFX());
 		theme_music.addActionListener(e -> musicTheme());
+		
 //		Final settings
 		pack();
 		setVisible(true);
@@ -141,6 +146,14 @@ public class UserInterface extends JFrame {
 		}
 
 	};
+	public void enableSoundFX() {
+		if (soundFX.isSelected()) {
+		volume = 1;
+		}
+		else {
+			volume = 0;
+		}
+	}
 	
 //	Method for getting player
 	public void loadPlayer () throws IOException, ClassNotFoundException {
@@ -208,10 +221,10 @@ public class UserInterface extends JFrame {
 	}
 	public void checkResult() {
 		try {
-			video.getHandScore(player.getHand());
+			video.getHandScore(player.getHand(), volume);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("ERROR!! Couldn´t get score");
 		}
 		}
 //	Method for saving player
@@ -225,6 +238,7 @@ public class UserInterface extends JFrame {
 			oos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("Error! couldn´t save player");
 		}
 		
 
@@ -285,15 +299,17 @@ public class UserInterface extends JFrame {
 	public void upDateScore() {
 		playerCredits.setText(String.format("Player credits: %d", player.getCredits()));
 	}
+	Audio theme = new Audio();
 	public void musicTheme() {
 
 		if (theme_music.isSelected()) {
-			Audio theme = new Audio();
+			
 			try {
 				theme.playSound("audio/music_theme.wav", 0.2);
+				theme_music.setVisible(false);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.out.println("Couldn´t play music theme");
 			}
 		}
 	}
