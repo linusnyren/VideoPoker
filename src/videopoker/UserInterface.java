@@ -3,6 +3,8 @@ package videopoker;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,9 +15,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineEvent;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -60,10 +59,11 @@ public class UserInterface extends JFrame {
 		
 		setLayout(new BorderLayout());
 		
+		
 		loadPlayer();
 		video = new VideoPoker();
 		
-//		Instatiate panels
+//		Instantiate panels
 		topPanel = new JPanel();
 		centerPanel = new JPanel();
 		centerPanel.setPreferredSize(new Dimension (600, 200));
@@ -120,6 +120,7 @@ public class UserInterface extends JFrame {
 		
 //		Final settings
 		pack();
+		setLocationRelativeTo(null); //Centers window. Needs to be called after "pack()" but before "setVisible()".
 		setVisible(true);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
@@ -221,7 +222,12 @@ public class UserInterface extends JFrame {
 	}
 	public void checkResult() {
 		try {
+
 			video.getHandScore(player.getHand(), volume);
+
+//			video.getHandScore(player.getHand());
+//			TODO: Change return to int? Needs to be calculated with the bet
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("ERROR!! Couldn´t get score");
@@ -299,7 +305,12 @@ public class UserInterface extends JFrame {
 	public void upDateScore() {
 		playerCredits.setText(String.format("Player credits: %d", player.getCredits()));
 	}
+
 	Audio theme = new Audio();
+
+	
+//	Starts music theme
+
 	public void musicTheme() {
 
 		if (theme_music.isSelected()) {
