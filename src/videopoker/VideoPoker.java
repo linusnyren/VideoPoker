@@ -72,7 +72,10 @@ public class VideoPoker {
 		}
 		return handToSort;
 	}
-
+//	Denna metod tar emot en int som avser för vilken kombination den skall testa, 4 för fyrtal etc.
+//	Den tar även en lista som ett argument, det är denna lista som prövas nedan.
+//	Sortcards sorterar korten i värdeordning vilket underlättar denna metod en hel del
+//	Jag lägger kortens nummervärde i en instansvariabel för att göra if satserna tydligare och lite mer DRY.
 	public boolean CheckForEquals(int par, List<Card> test) {
 		sortCards(test);
 		int a = calculateValueOfCard(test.get(0));
@@ -102,7 +105,9 @@ public class VideoPoker {
 		}
 		return false;
 	}
-
+//	Denna metod tar enbart emot en lista som argument
+//	sortCards sorterar denna listan efter nummervärdesordning.
+//	Lagrar värdena i en instansvariabel för att underlätta läsning av if sats och göra den lite mer DRY.
 	public boolean CheckForStraight(List<Card> test) {
 		sortCards(test);
 		int a = calculateValueOfCard(test.get(0));
@@ -116,7 +121,8 @@ public class VideoPoker {
 		else
 			return false;
 	}
-
+//	Denna metod tar enbart emot en lista som provas.
+//	Sen anropar den två andra metoder som kollar kriterierna, returnerar båda true så returnerar denna true.
 	public boolean checkStraightFlush(List<Card> test) {
 		if (CheckForStraight(test) == true && checkForFlush(test) == true) {
 			return true;
@@ -138,7 +144,7 @@ public class VideoPoker {
 		return -1;
 	}
 
-//	I denna metod så körs metoderna i turordning från högst utbetalningtill
+//	I denna metod så körs metoderna i turordning från högst utbetalning till
 //	lägsta utbetalning, där den nappar så spelas motsvarande ljud upp.
 //	Sen returneras multipeln för motsvarande ev vinst.
 	public int getHandScore(List<Card> hand, int volume) throws Exception {

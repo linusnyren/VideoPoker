@@ -12,42 +12,23 @@ import javax.swing.JComponent;
 
 public class Audio {
 	Clip clip;
+	
+//	Denna metod tar emot en sökväg för filen som skall spelas upp
+//	Tar även emot en double för att styra volymen, denna skall vara mellan 0->1
 	  public void playSound(String filepath, double volume) throws Exception {
 
-//		    Clip clip;
-	    	File soundFile = new File(filepath);
+	    	File soundFile = new File(filepath); //Lagrar filen i anvigen sökväg i variablen soundFile
 
-	        Line.Info linfo = new Line.Info(Clip.class); // Kolla exakt vad denna gör
+	        Line.Info linfo = new Line.Info(Clip.class); //Öppnar en ljudlinje i klassen Line
 	        Line line = AudioSystem.getLine(linfo);
 	        clip = (Clip) line;
-	        AudioInputStream ais = AudioSystem.getAudioInputStream(soundFile);
-	        clip.open(ais);
+	        AudioInputStream ais = AudioSystem.getAudioInputStream(soundFile); //Väljer filen som skall strömmas
+	        clip.open(ais);	//Öppnar ljudströmmen
 	        
 //	        Volym kontroll som styrs av variabeln volume
 	        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);        
 	        gainControl.setValue(20f * (float) Math.log10(volume));
 	        
-	        clip.start();
+	        clip.start(); //Startar ljudströmmen som spelar upp ljudfilen
 	        }
-	  
-
-	    public void update(LineEvent le) {
-	        LineEvent.Type type = le.getType();
-//	        System.out.println(type.toString());
-	        JComponent playingDialog = null;
-			if (type == LineEvent.Type.OPEN) {
-	            System.out.println("OPEN");
-	        } else if (type == LineEvent.Type.CLOSE) {
-	            System.out.println("CLOSE");
-	            System.exit(0);
-	        } else if (type == LineEvent.Type.START) {
-	            System.out.println("START");
-	            playingDialog.setVisible(true);
-	        } else if (type == LineEvent.Type.STOP) {
-	            System.out.println("STOP");
-	            playingDialog.setVisible(false);
-	            clip.close();
-	        }
-	    }
-
 }
