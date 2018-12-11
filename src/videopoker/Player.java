@@ -10,14 +10,19 @@ public class Player implements Serializable {
 		private String userName;
 		private List<Card> hand = new ArrayList<>();
 		
+		
+//		Constructor
 		public Player(int credits, String userName) {
 			this.credits = credits;
 			this.userName = userName;
 		}
 		
+//		Resets the lastbet to 0. 
 		public void resetLastBet() {
 			lastBet = 0;
 		}
+		
+//		Getters and setters. 
 		public int getCredits() {
 			return credits;
 		}
@@ -41,23 +46,28 @@ public class Player implements Serializable {
 		public int getLastbet() {
 			return lastBet;
 		}
-		
+
 		public void setLastBet (int lastBet) {
 			this.lastBet = lastBet;
 		}
  		
+		
+//		Adds a card last in the player hand. 
 		public void addCardToHand (Card card) {
 			hand.add(card);
 		}
 		
+//		Adds a card and inserts it on the given index. 
 		public void addCardToHand (int position, Card card) {
 			hand.add(position, card);
 		}
 		
+//		Removes the card on the given index. 
 		public void removeCardFromHand (int index) {
 			hand.remove(index);
 		}
 		
+//		Clears the players hand of cards.
 		public void clearHand() {
 			hand.clear();
 		}

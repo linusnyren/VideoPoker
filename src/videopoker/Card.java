@@ -14,7 +14,7 @@ public class Card implements Serializable {
 		return filename;
 	}
 	
-//	Konstruktor
+//	Constructor
 	public Card (Suit suit, String rank) {
 		this.suit = suit;
 		this.rank = rank;
@@ -34,17 +34,18 @@ public class Card implements Serializable {
 	
 	@Override
 	public String toString () {
-//		För snyggare utskrift av kort. 
+//		For nicer printout of cards 
 		return String.format("%s of %s", rank, suit.name().toLowerCase());
 	}
 	
 	@Override
 	public boolean equals(Object card) {
-//	Definierad equals metod för att möjliggöra jämförelser mellan kort. 		
+//	Method to compare cards based on suit and rank. 		
 		return this.getSuit() == ((Card) card).getSuit() && this.getRank() == ((Card) card).getRank();
 	}
 	
 	private void createFilename() {
+//		Creates a filenamne for access to cardimages (in resources).
 		filename = new ImageIcon(getClass().getResource("/" + getRank() + "_of_" + getSuit() + ".jpg"));
 //								 resource                /    2		       _of_    hearts       .jpg  
 	}

@@ -37,7 +37,6 @@ public class UserInterface extends JFrame {
 	private Border border = new LineBorder(Color.BLACK, 2);
 
 //	Components
-//	private JButton getNewHand;   TODO: Consider removing
 	private JButton holdAndGetSecondHand;
 	private JButton saveAndQuit;
 	private JButton makeBet;
@@ -50,8 +49,6 @@ public class UserInterface extends JFrame {
 	private Player player;
 	private VideoPoker video;
 	private Deck deck;
-
-//	private boolean music = false;
 
 	private int volume = 0;
 
@@ -150,7 +147,7 @@ public class UserInterface extends JFrame {
 		}
 	}
 
-//	Method for getting player
+//	Method for getting player. If no player is found a new one is instantiated (demo feature).
 	public void loadPlayer() throws IOException, ClassNotFoundException {
 
 		try {
@@ -177,6 +174,7 @@ public class UserInterface extends JFrame {
 		}
 	}
 
+//	The method replaces the "unchosen" cards
 	public void holdAndGetNewCards() {
 
 		holdAndGetSecondHand.setEnabled(false); // Inactivate get second hand.
@@ -205,6 +203,8 @@ public class UserInterface extends JFrame {
 		player.clearHand();
 	}
 
+	
+//	Checks the players hand againt the different combination. Returns an int (payout factor).
 	public int checkResult() {
 		int result = 0;
 
@@ -239,7 +239,7 @@ public class UserInterface extends JFrame {
 
 	}
 
-//	Check that the user has entered a valid bet.
+//	Check that the user has entered a valid bet and activates buttons to proceed if ok. 
 	public void checkBet() {
 
 		int bet = 0;
@@ -287,7 +287,6 @@ public class UserInterface extends JFrame {
 	Audio theme = new Audio();
 
 //	Starts music theme
-
 	public void musicTheme() {
 		if (theme_music.isSelected()) {
 			try {
