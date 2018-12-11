@@ -161,7 +161,6 @@ public class VideoPokerTest {
 	
 	@Test
 	void testWins() {
-//		System.out.println(Wins.Straight_Flush);
 		Wins winning = Wins.Straight_Flush;
 		assertEquals(40, winning.factor, "Testwins()");
 	}
@@ -192,7 +191,6 @@ public class VideoPokerTest {
 		if (1 == video.getHandScore(hand0,1)) {
 			a = true;
 			}
-//		System.out.println("hand0 " +a);
 		List<Card> hand2 = new ArrayList<>();
 		hand2.add(new Card(Suit.HEARTS, "2"));
 		hand2.add(new Card(Suit.CLUBS, "3"));
@@ -203,8 +201,6 @@ public class VideoPokerTest {
 		if (video.getHandScore(hand2,1) == 2) {
 			b = true;
 		}
-//		System.out.println("Hand2 " +b);
-
 		List<Card> hand3 = new ArrayList<>();
 		hand3.add(new Card(Suit.HEARTS, "2"));
 		hand3.add(new Card(Suit.SPADES, "5"));
@@ -215,8 +211,6 @@ public class VideoPokerTest {
 		if (video.getHandScore(hand3,1) == 9) {
 			c = true;
 		}
-//		System.out.println("Hand3 " +c);
-
 		List<Card> hand4 = new ArrayList<>();
 		hand4.add(new Card(Suit.HEARTS, "2"));
 		hand4.add(new Card(Suit.CLUBS, "3"));
@@ -227,8 +221,6 @@ public class VideoPokerTest {
 		if (video.getHandScore(hand4, 1) == 5) {
 			d = true;
 		}
-//		System.out.println("Hand4 " +d);
-
 		List<Card> hand5 = new ArrayList<>();
 		hand5.add(new Card(Suit.HEARTS, "2"));
 		hand5.add(new Card(Suit.HEARTS, "Jack"));
@@ -239,8 +231,6 @@ public class VideoPokerTest {
 		if (video.getHandScore(hand5, 1) == 6) {
 			e = true;
 		}
-//		System.out.println("Hand5 " +e);
-
 		List<Card> hand6 = new ArrayList<>();
 		hand6.add(new Card(Suit.HEARTS, "2"));
 		hand6.add(new Card(Suit.CLUBS, "3"));
@@ -251,8 +241,6 @@ public class VideoPokerTest {
 		if (video.getHandScore(hand6, 1) == 9) {
 			f = true;
 		}
-//		System.out.println("Hand6 " +f);
-
 		List<Card> hand7 = new ArrayList<>();
 		hand7.add(new Card(Suit.HEARTS, "2"));
 		hand7.add(new Card(Suit.CLUBS, "3"));
@@ -263,8 +251,6 @@ public class VideoPokerTest {
 		if (video.getHandScore(hand7, 1) == 20) {
 			g = true;
 		}
-//		System.out.println("Hand7 " +g);
-
 		List<Card> hand8 = new ArrayList<>();
 		hand8.add(new Card(Suit.HEARTS, "2"));
 		hand8.add(new Card(Suit.HEARTS, "3"));
@@ -275,8 +261,6 @@ public class VideoPokerTest {
 		if (video.getHandScore(hand8, 1) == 40) {
 			h = true;
 		}
-//		System.out.println("Hand8 " +h);
-
 		if (a == true && b ==true && c == true && d == true && e ==true && f == true && g == true && h == true) {
 			ok = true;
 		}
